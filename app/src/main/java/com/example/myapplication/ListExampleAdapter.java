@@ -1,9 +1,12 @@
 package com.example.myapplication;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,13 +41,35 @@ public class ListExampleAdapter extends RecyclerView.Adapter<ListExampleViewHold
 
     @Override
     //efectueaza diferite operatii
-    public void onBindViewHolder(@NonNull ListExampleViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ListExampleViewHolder holder, final int position) {
         final ListExampleModel glassModel = choicesList.get(position);
         holder.setValues(glassModel.getName(),glassModel.getFirstname());
 
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                AlertDialog.Builder a_builder = new AlertDialog.Builder(context);
+                a_builder.setMessage("Delete the item?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //sterge el
+                                Toast.makeText(context,"Item Deleted",Toast.LENGTH_LONG).show();
+                                choicesList.remove(position);
+                                notifyItemRemoved(position);
+
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = a_builder.create();
+                alert.setTitle("Dialog");
+                alert.show();
 
             }
         });

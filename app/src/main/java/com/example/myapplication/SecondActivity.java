@@ -40,6 +40,7 @@ public class SecondActivity extends AppCompatActivity {
         et_firstname = findViewById(R.id.et_firstname);
         addButton = findViewById(R.id.addButton);
         exampleListRv = findViewById(R.id.rv_secondary_list);
+        Toast.makeText(SecondActivity.this, "Short press on item to delete it!", Toast.LENGTH_SHORT).show();
     }
 
     private void setOnClickListeners() {
