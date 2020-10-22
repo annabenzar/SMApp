@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -69,5 +70,10 @@ public class ThirdActivity extends AppCompatActivity {
 
     public void updateViews(){
         mainTextView.setText(text);
+    }
+
+    public void nextActivity(View view){
+        Intent intent = new Intent(this, FourthActivity.class);
+        startActivity(intent);
     }
 }

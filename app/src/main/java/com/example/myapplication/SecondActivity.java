@@ -30,7 +30,6 @@ public class SecondActivity extends AppCompatActivity {
         setContentView(R.layout.activity_second);
         initializeViews();
         getIntent();
-        //initializeList();
         setOnClickListeners();
         setRecyclerView();
     }
@@ -75,5 +74,9 @@ public class SecondActivity extends AppCompatActivity {
         //se seteaza layoutmanager si adapter-ul pentru recyclerview
         exampleListRv.setLayoutManager(new LinearLayoutManager(this));
         exampleListRv.setAdapter(listExampleAdapter);
+    }
+    public void  nextActivity(View view){
+        Intent intent = new Intent(this, ThirdActivity.class);
+        startActivity(intent);
     }
 }

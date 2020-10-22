@@ -5,54 +5,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ThirdActivity">
+    tools:context=".FourthActivity">
 
     <TextView
-        android:id="@+id/tv_third_first"
+        android:id="@+id/tv_fourth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:text="Your text will appear here!"
+        android:text="Read and Write activity:)"
         android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/tv_third"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:text="Third Activity :)"
-        android:textSize="20sp" />
-
     <EditText
-        android:id="@+id/et_name"
+        android:id="@+id/et_fourth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:hint="Name"/>
-
+        android:hint="EditText"/>
     <Button
-        android:id="@+id/third_button"
+        android:id="@+id/bt_fourth"
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:layout_margin="20dp"
         android:background="@drawable/rounded_corners"
         android:textColor="#FFFFFF"
-        android:text="Add"/>
-
+        android:text="Write"/>
     <Button
-        android:id="@+id/third_button_two"
+        android:id="@+id/bt_fourth_two"
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:layout_margin="20dp"
         android:background="@drawable/rounded_corners"
-        android:onClick="nextActivity"
         android:textColor="#FFFFFF"
-        android:text="Next Page"/>
+        android:text="Read"/>
+    <TextView
+        android:id="@+id/tv_fourth_three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="Text from File :)"
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/tv_fourth_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:textSize="20sp" />
+
 
 </LinearLayout>
