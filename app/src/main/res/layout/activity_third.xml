@@ -51,7 +51,7 @@
         android:layout_height="44dp"
         android:layout_margin="20dp"
         android:background="@drawable/rounded_corners"
-        android:onClick="nextActivity"
+        android:onClick="toFourthActivity"
         android:textColor="#FFFFFF"
         android:text="Next Page"/>
 

@@ -75,7 +75,7 @@ public class SecondActivity extends AppCompatActivity {
         exampleListRv.setLayoutManager(new LinearLayoutManager(this));
         exampleListRv.setAdapter(listExampleAdapter);
     }
-    public void  nextActivity(View view){
+    public void toThirdActivity(View view){
         Intent intent = new Intent(this, ThirdActivity.class);
         startActivity(intent);
     }

@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     //va merge in activitatea urmatoare
-                                    activitateaUrmatoare(view);
+                                    toSecondActivitiy(view);
                                 }
                             })
                             .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void activitateaUrmatoare(View view) {
+    public void toSecondActivitiy(View view) {
             Intent intent = new Intent(this, SecondActivity.class);
             startActivity(intent);
 

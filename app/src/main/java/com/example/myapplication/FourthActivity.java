@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +26,7 @@ public class FourthActivity extends AppCompatActivity {
 
     private TextView fileTitle, textFromFile,texttoShow;
     private EditText editText;
-    private Button buttonWrite, buttonRead;
+    private Button buttonWrite, buttonRead,buttonNext;
     private String file = "myfile";
     private String fromEditToFile;
 
@@ -46,6 +47,7 @@ public class FourthActivity extends AppCompatActivity {
         editText = findViewById(R.id.et_fourth);
         buttonWrite = findViewById(R.id.bt_fourth);
         buttonRead = findViewById(R.id.bt_fourth_two);
+        buttonNext = findViewById(R.id.bt_fourth_three);
     }
 
     private void setOnClickListeners()
@@ -107,6 +109,11 @@ public class FourthActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+    public void toRoomActivity(View view){
+        Intent intent = new Intent(this, RoomActivity.class);
+        startActivity(intent);
     }
 }
 

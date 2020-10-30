@@ -72,7 +72,7 @@ public class ThirdActivity extends AppCompatActivity {
         mainTextView.setText(text);
     }
 
-    public void nextActivity(View view){
+    public void toFourthActivity(View view){
         Intent intent = new Intent(this, FourthActivity.class);
         startActivity(intent);
     }
