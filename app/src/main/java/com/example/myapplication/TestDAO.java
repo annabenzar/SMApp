@@ -23,4 +23,8 @@ public interface TestDAO {//contine metode pentru a accesa baza de date
 
     @Delete
     void delete(TestEntity user);
+
+    @Query("DELETE FROM TestEntity")
+    void deleteTable();
+
 }

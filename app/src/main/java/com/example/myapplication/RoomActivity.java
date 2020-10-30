@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -23,10 +24,14 @@ public class RoomActivity extends AppCompatActivity {
 
     private TestDatabase testDatabase;
     private String name;
-    private TextView room_tv;
+    //private TextView room_tv;
 
     //pentru afisare lista din baza de date
     private List<TestEntity> testEntityList;
+
+    //afisare cu recyclerView
+    private RecyclerView rvList;
+    private RoomAdapter roomAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +43,8 @@ public class RoomActivity extends AppCompatActivity {
 
     private void initializers()
     {
-        room_tv= findViewById(R.id.tv_room);
+        //room_tv= findViewById(R.id.tv_room);
+        rvList = findViewById(R.id.rv_room_list);
         testDatabase = TestDatabase.getInstance(this); //instantiere a bazei de date
         testEntityList = new ArrayList<>();
     }
@@ -85,7 +91,7 @@ public class RoomActivity extends AppCompatActivity {
 
             @Override
             protected TestEntity doInBackground(Void... voids) {
-                TestEntity testEntity = new TestEntity(name, "Ana");
+                TestEntity testEntity = new TestEntity(name, "Anna");
                 testDatabase.testDAO().insertAll(testEntity);
                 return testEntity;
             }
@@ -106,7 +112,7 @@ public class RoomActivity extends AppCompatActivity {
 
             @Override
             protected TestEntity doInBackground(Void... voids) {
-                TestEntity testEntity = new TestEntity(name, "Ana");
+                TestEntity testEntity = new TestEntity(name, "Anna");
                 testEntityList = testDatabase.testDAO().getAll(); //ca si cum am face add in second activity
                 return testEntity;
             }
@@ -120,9 +126,33 @@ public class RoomActivity extends AppCompatActivity {
         GetValue insertTask = new GetValue();
         insertTask.execute();
         
-        //afisare lista din baza de date
-        for(TestEntity model: testEntityList){
+        //afisare lista din baza de date cu for
+        /*for(TestEntity model: testEntityList){
             room_tv.append("\n"+model.name+" "+model.firstname);
+        }*/
+
+        //afisare cu recyclerview
+        roomAdapter = new RoomAdapter(testEntityList);
+        rvList.setLayoutManager(new LinearLayoutManager(this));
+        rvList.setAdapter(roomAdapter);
+
+
+    }
+    public void deleteFromDatabase(View view){
+        class DeleteValue extends AsyncTask<Void,Void, TestEntity>{
+
+            @Override
+            protected TestEntity doInBackground(Void... voids) {
+                TestEntity testEntity = new TestEntity(name, "Ana");
+                testDatabase.testDAO().deleteTable();
+                return  testEntity;
+            }
+            @Override
+            protected void onPostExecute(TestEntity testEntity) {
+                super.onPostExecute(testEntity);
+            }
         }
+        DeleteValue deleteTask = new DeleteValue();
+        deleteTask.execute();
     }
 }
