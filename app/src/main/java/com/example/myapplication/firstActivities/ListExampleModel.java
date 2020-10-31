@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.firstActivities;
 
 public class ListExampleModel {
     private String name;

@@ -1,58 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".firstActivities.ThirdActivity">
+    tools:context=".firstActivities.MainActivity">
 
     <TextView
-        android:id="@+id/tv_third_first"
+        android:id="@+id/tv_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:text="Your text will appear here!"
-        android:textSize="20sp" />
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:layout_above="@+id/et_username_register"
+        android:text="Please create your account! :)" />
 
-    <TextView
-        android:id="@+id/tv_third"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:text="Third Activity :)"
-        android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/et_name"
+        android:id="@+id/et_username_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:hint="Name"/>
+        android:layout_above="@+id/et_password_register"
+        android:hint="User_Name"/>
+
+    <EditText
+        android:id="@+id/et_password_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:hint="User_Password"
+        android:inputType="textPassword"
+        android:layout_centerInParent="true"/>
 
     <Button
-        android:id="@+id/third_button"
+        android:id="@+id/btn_register"
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:layout_margin="20dp"
+        android:layout_below="@+id/et_password_register"
+        android:text="Register"
         android:background="@drawable/rounded_corners"
-        android:textColor="#FFFFFF"
-        android:text="Add"/>
+        android:textColor="#FFFFFF" />
 
-    <Button
-        android:id="@+id/third_button_two"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:layout_margin="20dp"
-        android:background="@drawable/rounded_corners"
-        android:onClick="toFourthActivity"
-        android:textColor="#FFFFFF"
-        android:text="Next Page"/>
 
-</LinearLayout>
+</RelativeLayout>

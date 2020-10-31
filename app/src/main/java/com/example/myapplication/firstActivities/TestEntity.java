@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.firstActivities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

@@ -12,17 +12,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".LogInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SecondActivity" />
-        <activity android:name=".ThirdActivity" />
-        <activity android:name=".FourthActivity" />
-        <activity android:name=".RoomActivity" />
+        <activity android:name=".firstActivities.SecondActivity" />
+        <activity android:name=".firstActivities.ThirdActivity" />
+        <activity android:name=".firstActivities.FourthActivity" />
+        <activity android:name=".firstActivities.RoomActivity" />
+        <activity android:name=".firstActivities.MainActivity"/>
+        <activity android:name=".RegisterActivity"/>
+        <activity android:name=".HomeScreen"/>
+        <!--<activity android:name=".LogInActivity"/>.-->
     </application>
 
 </manifest>
