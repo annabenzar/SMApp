@@ -57,16 +57,12 @@ public class EditActivity extends AppCompatActivity {
 
         button = findViewById(R.id.profile_button);
 
-        if(storageHelper!=null) {
-            editablename.setText(storageHelper.getProfileEntity().getName());
-            editablefirstname.setText(storageHelper.getProfileEntity().getFirstname());
-            editableemail.setText(storageHelper.getProfileEntity().getEmail());
-            String s = String.valueOf(storageHelper.getProfileEntity().getAge());
+            editablename.setText(storageHelper.getUserEntity().getName());
+            editablefirstname.setText(storageHelper.getUserEntity().getFirstname());
+            editableemail.setText(storageHelper.getUserEntity().getEmail());
+            String s = String.valueOf(storageHelper.getUserEntity().getAge());
             editableage.setText(s);
-            editablePassword.setText(storageHelper.getProfileEntity().getPassword());
-
-        }
-
+            editablePassword.setText(storageHelper.getUserEntity().getPassword());
     }
     public void setOnClickListeners(){
         button.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +76,7 @@ public class EditActivity extends AppCompatActivity {
                 age = editableage.getText().toString();
                 final int finalAge = Integer.parseInt(age);
                 password = editablePassword.getText().toString();
-                id = storageHelper.getProfileEntity().getId();
+                id = storageHelper.getUserEntity().getId();
 
                 //validare campuri goale
                 if (validateInput(name, firstname, email, age, password)) {
@@ -110,21 +106,15 @@ public class EditActivity extends AppCompatActivity {
 
             @Override
             protected UserEntity doInBackground(Void... voids) {
-                UserEntity userEntity = new UserEntity();
-                userEntity.setName(name);
-                userEntity.setFirstname(firstname);
-                userEntity.setEmail(email);
-                userEntity.setAge(age);
-                userEntity.setPassword(password);
+                UserEntity userEntity = new UserEntity(name,firstname,email,age,password);
                 userDatabase.userDAO().update(name,firstname,email,age,password,id);
                 return userEntity;
             }
-
             @Override
             protected void onPostExecute(UserEntity testEntity) {
                 super.onPostExecute(testEntity);
                 Toast.makeText(EditActivity.this, "Fields edited", Toast.LENGTH_SHORT).show();
-                getValues(name, firstname, email, age, password);
+                storageHelper.setUserEntity(userEntity);
                 setIntent();
             }
         }
@@ -132,16 +122,6 @@ public class EditActivity extends AppCompatActivity {
         updateTask.execute();
     }
 
-    public void getValues(final String name, final String firstName, final String email, final int age, final String password){
-        //salvare valori in storage helper
-        AppExecutors.getInstance().diskIO().execute(new Runnable() {
-            @Override
-            public void run() {
-               storageHelper.setProfileEntity(name,firstName,age,email,password);
-            }
-        });
-
-    }
     public void setIntent(){
         Intent intent = new Intent(this, HomeScreen.class);
         startActivity(intent);

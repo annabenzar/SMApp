@@ -4,24 +4,18 @@ import com.example.myapplication.UserEntity;
 
 public class StorageHelper {
     private static StorageHelper instance;
-    private final UserEntity userEntity= new UserEntity();
+    private  UserEntity userEntity;
 
-    private StorageHelper() {}
-    public static StorageHelper getInstance(){
+    public static  StorageHelper getInstance(){
         if(instance ==null){
-            return new StorageHelper();
+            instance = new StorageHelper();
         }
         return instance;
     }
-    public UserEntity getProfileEntity() {
+    public UserEntity getUserEntity() {
         return userEntity;
     }
-    public void setProfileEntity(String name, String firstName, int age, String email, String password) {
-        userEntity.setName(name);
-        userEntity.setFirstname(firstName);
-        userEntity.setEmail(email);
-        userEntity.setAge(age);
-        userEntity.setPassword(password);
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
-
 }

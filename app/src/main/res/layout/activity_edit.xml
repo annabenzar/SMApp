@@ -17,7 +17,7 @@
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
         android:textStyle="bold"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:text="Edit profile!" />
     <TextView
         android:id="@+id/profile_name"
@@ -27,7 +27,7 @@
         android:layout_marginTop="27dp"
         android:layout_marginEnd="20dp"
         android:textStyle="bold"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:layout_below="@+id/text_home"
         android:text="Name: " />
     <EditText
@@ -37,7 +37,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:layout_below="@+id/profile_name"
         android:hint="Enter name" />
     <TextView
@@ -48,7 +48,7 @@
         android:layout_marginTop="23dp"
         android:layout_marginEnd="20dp"
         android:textStyle="bold"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:layout_below="@+id/profile_yourname"
         android:text="Firstname: " />
     <EditText
@@ -58,7 +58,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:layout_below="@+id/profile_firstname"
         android:hint="Enter firstname" />
     <TextView
@@ -69,7 +69,7 @@
         android:layout_marginTop="23dp"
         android:layout_marginEnd="20dp"
         android:textStyle="bold"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:layout_below="@+id/profile_yourfirstname"
         android:text="E-mail: " />
     <EditText
@@ -79,7 +79,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:layout_below="@+id/profile_email"
         android:hint="Enter email"/>
     <TextView
@@ -90,7 +90,7 @@
         android:layout_marginTop="23dp"
         android:layout_marginEnd="20dp"
         android:textStyle="bold"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:layout_below="@+id/profile_youremail"
         android:text="Age: " />
     <EditText
@@ -100,7 +100,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:layout_below="@+id/profile_age"
         android:hint="Enter age" />
     <TextView
@@ -111,7 +111,7 @@
         android:layout_marginTop="23dp"
         android:layout_marginEnd="20dp"
         android:textStyle="bold"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:layout_below="@+id/profile_yourage"
         android:text="Password: " />
     <EditText
@@ -121,7 +121,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:layout_below="@+id/profile_password"
         android:inputType="textPassword"
         android:hint="Enter password" />
@@ -129,7 +129,7 @@
         android:id="@+id/profile_button"
         android:layout_width="match_parent"
         android:layout_height="44dp"
-        android:layout_margin="20dp"
+        android:layout_margn="20dp"
         android:background="@drawable/rounded_corners"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/profile_yourpassword"

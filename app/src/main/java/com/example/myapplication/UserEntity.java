@@ -7,10 +7,9 @@ import androidx.room.PrimaryKey;
 
 import java.net.UnknownServiceException;
 
-@Entity//(tableName="numele pe care vreau eu sa il dau tabelei") case-insensitive
+@Entity//(tableName="") case-insensitive
 public class UserEntity { //tabel in baza de date
-    //contine id nume prenume - creeeasza o coloana pentru fiecare field
-    //private static UserEntity instance = null;
+    //contine id nume prenume - creeeaza o coloana pentru fiecare field
     @PrimaryKey(autoGenerate = true)
     public int id;
     @ColumnInfo(name = "name")
@@ -24,15 +23,13 @@ public class UserEntity { //tabel in baza de date
     @ColumnInfo(name="password")
     public String password;
 
-
-
-    /*private UserEntity() {}
-    public static UserEntity getInstance(){
-        if(instance == null)
-            return new UserEntity();
-        return instance;
-    }*/
-    public UserEntity(){ }
+    public UserEntity(String name, String firstname, String email, int age, String password) {
+        this.name = name;
+        this.firstname = firstname;
+        this.email = email;
+        this.age = age;
+        this.password = password;
+    }
 
     public int getId() {
         return id;

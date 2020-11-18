@@ -21,6 +21,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button registerButton;
     private TextView room_tv;
 
+
     //var pentru preluare
     private String name, firstname, email, age, password;
 
@@ -123,13 +124,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             protected UserEntity doInBackground(Void... voids) {
-                UserEntity userEntity = new UserEntity();
-                userEntity.setName(name);
-                userEntity.setFirstname(firstname);
-                userEntity.setEmail(email);
-                userEntity.setAge(age);
-                userEntity.setPassword(password);
-                //de pus setere pentru fiecare field(fara constructor)
+                UserEntity userEntity = new UserEntity(name,firstname,email,age,password);
                 userDatabase.userDAO().insertAll(userEntity);
                 return userEntity;
             }

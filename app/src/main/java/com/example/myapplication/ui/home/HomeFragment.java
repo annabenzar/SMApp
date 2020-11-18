@@ -22,44 +22,42 @@ public class HomeFragment extends Fragment {
     private TextView editablename, editablefirstname, editableemail, editableage;
     private Button button;
 
-    private UserDatabase userDatabase;
+    private UserDatabase userDatabase = UserDatabase.getInstance(getActivity());;
     StorageHelper storageHelper = StorageHelper.getInstance();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         final TextView textView = root.findViewById(R.id.text_home);
-        TextView username = root.findViewById(R.id.name_home);
-
-        nametv = root.findViewById(R.id.profile_name);
-        editablename = root.findViewById(R.id.profile_yourname);
-
-        firstnametv = root.findViewById(R.id.profile_firstname);
-        editablefirstname = root.findViewById(R.id.profile_yourfirstname);
-
-        emailtv = root.findViewById(R.id.profile_email);
-        editableemail = root.findViewById(R.id.profile_youremail);
-
-        agetv = root.findViewById(R.id.profile_age);
-        editableage = root.findViewById(R.id.profile_yourage);
-
-        button = root.findViewById(R.id.profile_button);
-        userDatabase = UserDatabase.getInstance(getActivity());
-
-
-        username.setText(storageHelper.getProfileEntity().getFirstname());
+        initializeViews(root);
         setValues();
         setOnClicklisteners();
 
         return root;
     }
 
+    public void initializeViews(View root){
+
+        TextView username = root.findViewById(R.id.name_home);
+        nametv = root.findViewById(R.id.profile_name);
+        editablename = root.findViewById(R.id.profile_yourname);
+        firstnametv = root.findViewById(R.id.profile_firstname);
+        editablefirstname = root.findViewById(R.id.profile_yourfirstname);
+        emailtv = root.findViewById(R.id.profile_email);
+        editableemail = root.findViewById(R.id.profile_youremail);
+        agetv = root.findViewById(R.id.profile_age);
+        editableage = root.findViewById(R.id.profile_yourage);
+        button = root.findViewById(R.id.profile_button);
+        username.setText(storageHelper.getUserEntity().getFirstname());
+
+    }
+
     public void setValues() {
-            editablename.setText(storageHelper.getProfileEntity().getName());
-            editablefirstname.setText(storageHelper.getProfileEntity().getFirstname());
-            editableemail.setText(storageHelper.getProfileEntity().getEmail());
-            String s = String.valueOf(storageHelper.getProfileEntity().getAge());
+
+            editablename.setText(storageHelper.getUserEntity().getName());
+            editablefirstname.setText(storageHelper.getUserEntity().getFirstname());
+            editableemail.setText(storageHelper.getUserEntity().getEmail());
+            String s = String.valueOf(storageHelper.getUserEntity().getAge());
             editableage.setText(s);
     }
 

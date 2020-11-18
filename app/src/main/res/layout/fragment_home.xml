@@ -51,8 +51,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
         android:textSize="20sp"
-        android:layout_below="@+id/profile_name"
-        android:hint="___" />
+        android:layout_below="@+id/profile_name" />
 
     <TextView
         android:id="@+id/profile_firstname"
@@ -74,8 +73,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
         android:textSize="20sp"
-        android:layout_below="@+id/profile_firstname"
-        android:hint="___" />
+        android:layout_below="@+id/profile_firstname" />
 
     <TextView
         android:id="@+id/profile_email"
@@ -97,8 +95,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
         android:textSize="20sp"
-        android:layout_below="@+id/profile_email"
-        android:hint="___" />
+        android:layout_below="@+id/profile_email" />
 
     <TextView
         android:id="@+id/profile_age"
@@ -120,8 +117,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
         android:textSize="20sp"
-        android:layout_below="@+id/profile_age"
-        android:hint="___" />
+        android:layout_below="@+id/profile_age"/>
 
     <Button
         android:id="@+id/profile_button"

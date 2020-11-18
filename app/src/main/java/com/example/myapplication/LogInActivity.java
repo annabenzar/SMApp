@@ -13,7 +13,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.ui.home.StorageHelper;
-import com.google.android.gms.auth.api.signin.internal.Storage;
 
 public class LogInActivity extends AppCompatActivity {
 
@@ -25,7 +24,7 @@ public class LogInActivity extends AppCompatActivity {
     public static final String TEXT = "text";
     public static final String TEXT2 = "text2";
     private String text,text2;
-    StorageHelper storageHelper = StorageHelper.getInstance(); //instantiat pt prima data
+    StorageHelper storageHelper = StorageHelper.getInstance();
 
     //baza de date
     UserEntity userEntity;
@@ -67,8 +66,6 @@ public class LogInActivity extends AppCompatActivity {
                 }else{
                     //trimitere catre pagina homeScreen
                     //query pe baza de date cu thread nou
-                    //UserDAO userDAO = userDatabase.userDAO();
-                   // loginText.append("\n" + emailText + " " + passwordText);
                     AppExecutors.getInstance().diskIO().execute(new Runnable() {
                         @Override
                         public void run() {
@@ -135,17 +132,13 @@ public class LogInActivity extends AppCompatActivity {
                         }
                     });
                 }else{
-                    String name = userEntity.firstname;
                     saveData();
-                    setValues(userEntity.name,userEntity.firstname,userEntity.email,userEntity.age,userEntity.password,userEntity.id);
+                    storageHelper.setUserEntity(userEntity);
                     toHomePage();
                 }
             }
         }
         TestLogin testLoginTask = new TestLogin();
         testLoginTask.execute();
-    }
-    public void setValues(final String name, final String firstname,final String email, final int age, final String password,final int id){
-        storageHelper.setProfileEntity(name,firstname,age,email,password);
     }
 }
