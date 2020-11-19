@@ -12,33 +12,28 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.myapplication.Helpers.StorageHelper;
 import com.example.myapplication.R;
-import com.example.myapplication.UserDatabase;
-import com.example.myapplication.UserEntity;
 
 public class HomeFragment extends Fragment {
 
-    private TextView nametv, firstnametv, emailtv, agetv;
-    private TextView editablename, editablefirstname, editableemail, editableage;
+    private TextView username,nametv,firstnametv,emailtv,agetv;
+    private TextView editablename,editablefirstname,editableemail,editableage;
     private Button button;
 
-    private UserDatabase userDatabase = UserDatabase.getInstance(getActivity());;
     StorageHelper storageHelper = StorageHelper.getInstance();
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         final TextView textView = root.findViewById(R.id.text_home);
         initializeViews(root);
         setValues();
-        setOnClicklisteners();
-
+        setOnClickListeners();
         return root;
     }
 
     public void initializeViews(View root){
-
-        TextView username = root.findViewById(R.id.name_home);
+        username = root.findViewById(R.id.name_home);
         nametv = root.findViewById(R.id.profile_name);
         editablename = root.findViewById(R.id.profile_yourname);
         firstnametv = root.findViewById(R.id.profile_firstname);
@@ -48,21 +43,16 @@ public class HomeFragment extends Fragment {
         agetv = root.findViewById(R.id.profile_age);
         editableage = root.findViewById(R.id.profile_yourage);
         button = root.findViewById(R.id.profile_button);
+    }
+
+    public void setValues(){
         username.setText(storageHelper.getUserEntity().getFirstname());
-
+        editablename.setText(storageHelper.getUserEntity().getName());
+        editablefirstname.setText(storageHelper.getUserEntity().getFirstname());
+        editableemail.setText(storageHelper.getUserEntity().getEmail());
+        editableage.setText(storageHelper.getUserEntity().getAge());
     }
-
-    public void setValues() {
-
-            editablename.setText(storageHelper.getUserEntity().getName());
-            editablefirstname.setText(storageHelper.getUserEntity().getFirstname());
-            editableemail.setText(storageHelper.getUserEntity().getEmail());
-            String s = String.valueOf(storageHelper.getUserEntity().getAge());
-            editableage.setText(s);
-    }
-
-    public void setOnClicklisteners() {
-
+    public void setOnClickListeners() {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

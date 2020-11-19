@@ -1,92 +1,85 @@
 package com.example.myapplication.ui.home;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.AppExecutors;
+import com.example.myapplication.FirebaseLoginActivity;
+import com.example.myapplication.FirebaseRegisterActivity;
+import com.example.myapplication.Helpers.StorageHelper;
 import com.example.myapplication.HomeScreen;
 import com.example.myapplication.R;
-import com.example.myapplication.UserDatabase;
 import com.example.myapplication.UserEntity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.HashMap;
+
+import static com.example.myapplication.Helpers.FirebaseHelper.usersDatabase;
 
 public class EditActivity extends AppCompatActivity {
 
     private TextView nametv,firstnametv,emailtv,agetv,message,passwordtv;
-    private TextView editablename,editablefirstname,editableemail,editableage,editablePassword;
+    private EditText editablename,editablefirstname,editableemail,editableage,editablePassword;
     private Button button;
-    String name,firstname,email,age,password;
-    private UserEntity userEntity;
-    private UserDatabase userDatabase;
-    private int id;
     StorageHelper storageHelper = StorageHelper.getInstance();
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
         initializers();
-        userDatabase = UserDatabase.getInstance(this);
+        setValues();
+
         setOnClickListeners();
     }
 
     public void initializers(){
 
         message = findViewById(R.id.text_home);
-
         nametv = findViewById(R.id.profile_name);
         editablename = findViewById(R.id.profile_yourname);
-
         firstnametv = findViewById(R.id.profile_firstname);
         editablefirstname = findViewById(R.id.profile_yourfirstname);
-
         emailtv = findViewById(R.id.profile_email);
         editableemail = findViewById(R.id.profile_youremail);
-
         agetv = findViewById(R.id.profile_age);
         editableage = findViewById(R.id.profile_yourage);
-
         passwordtv = findViewById(R.id.profile_password);
         editablePassword = findViewById(R.id.profile_yourpassword);
-
         button = findViewById(R.id.profile_button);
-
-            editablename.setText(storageHelper.getUserEntity().getName());
-            editablefirstname.setText(storageHelper.getUserEntity().getFirstname());
-            editableemail.setText(storageHelper.getUserEntity().getEmail());
-            String s = String.valueOf(storageHelper.getUserEntity().getAge());
-            editableage.setText(s);
-            editablePassword.setText(storageHelper.getUserEntity().getPassword());
+    }
+    public void setValues(){
+        editablename.setText(storageHelper.getUserEntity().getName());
+        editablefirstname.setText(storageHelper.getUserEntity().getFirstname());
+        editableemail.setText(storageHelper.getUserEntity().getEmail());
+        editableage.setText(storageHelper.getUserEntity().getAge());
+        editablePassword.setText(storageHelper.getUserEntity().getPassword());
     }
     public void setOnClickListeners(){
         button.setOnClickListener(new View.OnClickListener() {
-
-
+            String name,firstname,email,age,password;
             @Override
             public void onClick(View v) {
                 name = editablename.getText().toString();
                 firstname = editablefirstname.getText().toString();
                 email = editableemail.getText().toString();
                 age = editableage.getText().toString();
-                final int finalAge = Integer.parseInt(age);
                 password = editablePassword.getText().toString();
-                id = storageHelper.getUserEntity().getId();
 
                 //validare campuri goale
                 if (validateInput(name, firstname, email, age, password)) {
                     //inserare in baza de date
-                    AppExecutors.getInstance().diskIO().execute(new Runnable() {
-                        @Override
-                        public void run() {
-                                updateDatabase(name, firstname, email, finalAge,password,id); //cred ca astia
-                        }
-                    });
+                    updateDatabase(name,firstname,email,age,password);
                 } else {
                     Toast.makeText(EditActivity.this, "Please fill all fields!", Toast.LENGTH_SHORT).show();
                 }
@@ -100,30 +93,21 @@ public class EditActivity extends AppCompatActivity {
                     && !email.isEmpty() && !password.isEmpty() && !age.isEmpty();
     }
 
-    private void updateDatabase(final String name, final String firstname, final String email, final int age,final String password,final int id) {
-        @SuppressLint("StaticFieldLeak")
-        class UpdateValue extends AsyncTask<Void, Void, UserEntity> {
-
-            @Override
-            protected UserEntity doInBackground(Void... voids) {
-                UserEntity userEntity = new UserEntity(name,firstname,email,age,password);
-                userDatabase.userDAO().update(name,firstname,email,age,password,id);
-                return userEntity;
+    public void updateDatabase(final String name,final String firstname,final String email,final String age, final String password){
+            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+            FirebaseUser curentUser = firebaseAuth.getCurrentUser();
+            if (curentUser == null){
+                return;
             }
-            @Override
-            protected void onPostExecute(UserEntity testEntity) {
-                super.onPostExecute(testEntity);
-                Toast.makeText(EditActivity.this, "Fields edited", Toast.LENGTH_SHORT).show();
-                storageHelper.setUserEntity(userEntity);
-                setIntent();
-            }
-        }
-        UpdateValue updateTask = new UpdateValue();
-        updateTask.execute();
-    }
-
-    public void setIntent(){
-        Intent intent = new Intent(this, HomeScreen.class);
-        startActivity(intent);
+            HashMap<String,Object> map = new HashMap<>();
+            map.put("name",name);
+            map.put("firstname",firstname);
+            map.put("email",email);
+            map.put("age",age);
+            map.put("password",password);
+            usersDatabase.child(curentUser.getUid()).updateChildren(map);
+            UserEntity userEntity = new UserEntity(name,firstname,email,age,password);
+            StorageHelper.getInstance().setUserEntity(userEntity);
+            startActivity(new Intent(EditActivity.this, HomeScreen.class));
     }
 }

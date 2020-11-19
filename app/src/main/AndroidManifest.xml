@@ -17,7 +17,7 @@
             android:name=".HomeScreen"
             android:label="@string/title_activity_menu" >
         </activity>-->
-        <activity android:name=".LogInActivity" >
+        <activity android:name=".FirebaseLoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,9 +29,8 @@
         <activity android:name=".firstActivities.FourthActivity" />
         <activity android:name=".firstActivities.RoomActivity" />
         <activity android:name=".firstActivities.MainActivity" />
-        <activity android:name=".RegisterActivity" />
         <activity android:name=".HomeScreen"/>
         <activity android:name=".ui.home.EditActivity"/>
+        <activity android:name=".FirebaseRegisterActivity"/>
     </application>
-
 </manifest>

@@ -1,58 +1,25 @@
 package com.example.myapplication;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
+public class UserEntity {
 
-import java.net.UnknownServiceException;
+    public String name, firstname, email, age, password;
 
-@Entity//(tableName="") case-insensitive
-public class UserEntity { //tabel in baza de date
-    //contine id nume prenume - creeeaza o coloana pentru fiecare field
-    @PrimaryKey(autoGenerate = true)
-    public int id;
-    @ColumnInfo(name = "name")
-    public String name;
-    @ColumnInfo(name = "firstname")
-    public String firstname;
-    @ColumnInfo(name="email")
-    public String email;
-    @ColumnInfo(name="age")
-    public int age;
-    @ColumnInfo(name="password")
-    public String password;
-
-    public UserEntity(String name, String firstname, String email, int age, String password) {
+    public UserEntity(String name, String firstname, String email, String age, String password) {
         this.name = name;
         this.firstname = firstname;
         this.email = email;
         this.age = age;
         this.password = password;
     }
+    public UserEntity(){
 
-    public int getId() {
-        return id;
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getFirstname() {
@@ -71,11 +38,20 @@ public class UserEntity { //tabel in baza de date
         this.email = email;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
+

@@ -37,7 +37,7 @@ public class DashboardFragment extends Fragment {
         et_firstname = root.findViewById(R.id.et_firstname);
         addButton = root.findViewById(R.id.addButton);
         exampleListRv = root.findViewById(R.id.rv_secondary_list);
-        Toast.makeText(getContext(), "Short press on item to delete it!", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "Short press on item to delete it!", Toast.LENGTH_SHORT).show();
 
         setOnClickListeners();
         setRecyclerView();

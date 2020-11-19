@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.home;
+package com.example.myapplication.Helpers;
 
 import com.example.myapplication.UserEntity;
 
