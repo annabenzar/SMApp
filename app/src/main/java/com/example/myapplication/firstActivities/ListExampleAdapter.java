@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.ListExampleViewHolder;
 import com.example.myapplication.R;
 
 import java.util.List;
@@ -45,7 +46,7 @@ public class ListExampleAdapter extends RecyclerView.Adapter<ListExampleViewHold
     //efectueaza diferite operatii
     public void onBindViewHolder(@NonNull ListExampleViewHolder holder, final int position) {
         final ListExampleModel glassModel = choicesList.get(position);
-        holder.setValues(glassModel.getName(),glassModel.getFirstname());
+        //holder.setValues(glassModel.getName(),glassModel.getFirstname());
 
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override

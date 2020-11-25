@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.myapplication.Helpers.FirebaseHelper;
 import com.example.myapplication.Helpers.StorageHelper;
+import com.example.myapplication.Models.UserEntity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;

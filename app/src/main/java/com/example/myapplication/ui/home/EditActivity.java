@@ -8,18 +8,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.FirebaseLoginActivity;
-import com.example.myapplication.FirebaseRegisterActivity;
 import com.example.myapplication.Helpers.StorageHelper;
 import com.example.myapplication.HomeScreen;
 import com.example.myapplication.R;
-import com.example.myapplication.UserEntity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import com.example.myapplication.Models.UserEntity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

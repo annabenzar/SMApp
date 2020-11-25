@@ -1,4 +1,4 @@
-package com.example.myapplication.firstActivities;
+package com.example.myapplication;
 
 import android.view.View;
 import android.widget.TextView;
@@ -23,7 +23,7 @@ public class ListExampleViewHolder extends RecyclerView.ViewHolder {
         firstnameTv = itemView.findViewById(R.id.tv_row_example_firstname);
     }
 
-    public void setValues(String name, String firstname){
+    public void setValues(String name, String firstname,int age){
         nameTv.setText(name);
         firstnameTv.setText(firstname);
     }

@@ -1,13 +1,22 @@
-package com.example.myapplication.firstActivities;
+package com.example.myapplication.Models;
 
 public class ListExampleModel {
     private String name;
     private String firstname;
+    private int age;
+
+    public ListExampleModel(String name, String firstname, int age) {
+        this.name = name;
+        this.firstname = firstname;
+        this.age = age;
+    }
 
     public ListExampleModel(String name, String firstname) {
-        this.name=name;
-        this.firstname=firstname;
-        //this.age=age;
+        this.name = name;
+        this.firstname = firstname;
+    }
+
+    public ListExampleModel() {
     }
 
     public String getName() {
@@ -26,4 +35,11 @@ public class ListExampleModel {
         this.firstname = firstname;
     }
 
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 }

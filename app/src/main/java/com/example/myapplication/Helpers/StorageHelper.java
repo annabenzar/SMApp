@@ -1,6 +1,6 @@
 package com.example.myapplication.Helpers;
 
-import com.example.myapplication.UserEntity;
+import com.example.myapplication.Models.UserEntity;
 
 public class StorageHelper {
     private static StorageHelper instance;

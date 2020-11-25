@@ -1,6 +1,5 @@
 package com.example.myapplication.ui.home;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+
 import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.Helpers.StorageHelper;
@@ -19,7 +19,7 @@ public class HomeFragment extends Fragment {
 
     private TextView username,nametv,firstnametv,emailtv,agetv;
     private TextView editablename,editablefirstname,editableemail,editableage;
-    private Button button;
+    private Button button,button2;
 
     StorageHelper storageHelper = StorageHelper.getInstance();
 
@@ -43,6 +43,7 @@ public class HomeFragment extends Fragment {
         agetv = root.findViewById(R.id.profile_age);
         editableage = root.findViewById(R.id.profile_yourage);
         button = root.findViewById(R.id.profile_button);
+        button2 = root.findViewById(R.id.upload_button);
     }
 
     public void setValues(){
@@ -57,6 +58,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), EditActivity.class);
+                startActivity(intent);
+            }
+        });
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), PhotoGalleryActivity.class);
                 startActivity(intent);
             }
         });

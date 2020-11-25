@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.ListExampleViewHolder;
 import com.example.myapplication.R;
 
 import java.util.List;
@@ -39,7 +40,7 @@ public class RoomAdapter extends RecyclerView.Adapter<ListExampleViewHolder> {
     //efectueaza diferite operatii
     public void onBindViewHolder(@NonNull ListExampleViewHolder holder, final int position) {
         final TestEntity glassModel = testEntityList.get(position);
-        holder.setValues(glassModel.getName(),glassModel.getFirstname());
+        //holder.setValues(glassModel.getName(),glassModel.getFirstname());
     }
 
     @Override

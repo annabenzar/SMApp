@@ -17,7 +17,7 @@ public class HomeScreen extends AppCompatActivity implements BottomNavigationVie
 
     private HomeFragment homeFragment;
     private DashboardFragment dashboardFragment;
-    private NotificationsFragment notificationsFragment;
+    private NotificationsFragment notificationFragment;
 
     private BottomNavigationView navView;
     //tine evidenta fragmentului curent
@@ -54,8 +54,8 @@ public class HomeScreen extends AppCompatActivity implements BottomNavigationVie
                 return true;
 
             case R.id.navigation_notifications:
-                fragmentManager.beginTransaction().hide(activeFragment).show(notificationsFragment).commit();
-                activeFragment = notificationsFragment;
+                fragmentManager.beginTransaction().hide(activeFragment).show(notificationFragment).commit();
+                activeFragment = notificationFragment;
                 return true;
         }
         return false;
@@ -63,7 +63,7 @@ public class HomeScreen extends AppCompatActivity implements BottomNavigationVie
 
     private void LoadFragment(String name) {
 
-        fragmentManager.beginTransaction().add(R.id.nav_host_fragment, notificationsFragment, "3").hide(notificationsFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.nav_host_fragment, notificationFragment, "3").hide(notificationFragment).commit();
         fragmentManager.beginTransaction().add(R.id.nav_host_fragment, dashboardFragment, "2").hide(dashboardFragment).commit();
         fragmentManager.beginTransaction().add(R.id.nav_host_fragment, homeFragment, "1").detach(homeFragment).attach(homeFragment).commit();
         Bundle bundle = new Bundle();
@@ -74,7 +74,7 @@ public class HomeScreen extends AppCompatActivity implements BottomNavigationVie
     public void initializeViews() {
         homeFragment = new HomeFragment();
         dashboardFragment = new DashboardFragment();
-        notificationsFragment = new NotificationsFragment();
+        notificationFragment = new NotificationsFragment();
 
         //ia val primului fragment
         activeFragment = homeFragment;
