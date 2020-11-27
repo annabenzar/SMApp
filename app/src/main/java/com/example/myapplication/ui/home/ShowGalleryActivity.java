@@ -2,31 +2,26 @@ package com.example.myapplication.ui.home;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.myapplication.Adapters.PhotoAdapter;
-import com.example.myapplication.Adapters.PhotoViewHolder;
 import com.example.myapplication.Models.ListPhotoModel;
 import com.example.myapplication.R;
-import com.example.myapplication.firstActivities.ListExampleAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import static com.example.myapplication.Helpers.FirebaseHelper.urlDatabase;
 
 public class ShowGalleryActivity extends AppCompatActivity {
-    DatabaseReference databaseReference;
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter ;
-    ProgressDialog progressDialog;
     List<ListPhotoModel> list = new ArrayList<>();
+
+    ProgressDialog progressDialog;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +35,8 @@ public class ShowGalleryActivity extends AppCompatActivity {
         progressDialog.setMessage("Loading Images From Firebase.");
         progressDialog.show();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("All_Image_Uploads_Database");
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        urlDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
 

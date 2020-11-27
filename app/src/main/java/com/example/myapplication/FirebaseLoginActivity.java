@@ -44,9 +44,9 @@ public class FirebaseLoginActivity extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         //logare automata
-        if (user != null){
-            startActivity(new Intent(FirebaseLoginActivity.this, HomeScreen.class));
-        }
+//        if (user != null){
+//            startActivity(new Intent(FirebaseLoginActivity.this, HomeScreen.class));
+//        }
     }
 
     private void initializeViews() {
