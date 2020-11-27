@@ -5,5 +5,5 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class FirebaseHelper {
     public static final DatabaseReference usersDatabase = FirebaseDatabase.getInstance().getReference("users");
-    public static final DatabaseReference exampleDatabase = FirebaseDatabase.getInstance().getReference("example");
+    public static final DatabaseReference urlDatabase = FirebaseDatabase.getInstance().getReference("All_Image_Uploads_Database");
 }

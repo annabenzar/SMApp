@@ -62,10 +62,8 @@ public class ShowGalleryActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
                 // Hiding the progress dialog.
                 progressDialog.dismiss();
-
             }
         });
 

@@ -19,8 +19,11 @@ import android.widget.Toast;
 import com.example.myapplication.HomeScreen;
 import com.example.myapplication.Models.ListPhotoModel;
 import com.example.myapplication.R;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -48,6 +51,7 @@ public class PhotoGalleryActivity extends AppCompatActivity {
     String Database_Path = "All_Image_Uploads_Database";
     StorageReference storageReference;
     DatabaseReference databaseReference;
+    UploadTask uploadTask;
 
 
     @Override
@@ -137,36 +141,41 @@ public class PhotoGalleryActivity extends AppCompatActivity {
             progressDialog.show();
 
             //second storage ref
-            StorageReference storageReference2 = storageReference.child(Storage_Path + System.currentTimeMillis() + "." + GetFileExtension(filePath));
-            
-            storageReference2.putFile(filePath)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            progressDialog.dismiss();
-                            Toast.makeText(PhotoGalleryActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
-                            @SuppressWarnings("VisibleForTests")
-                            ListPhotoModel listPhotoModel = new ListPhotoModel(taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
+            final StorageReference storageReference2 = storageReference.child(Storage_Path + System.currentTimeMillis() + "." + GetFileExtension(filePath));
+            UploadTask uploadTask = storageReference2.putFile(filePath);
 
-                            String ImageUploadId = databaseReference.push().getKey();
-                            databaseReference.child(ImageUploadId).setValue(listPhotoModel);
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            progressDialog.dismiss();
-                            Toast.makeText(PhotoGalleryActivity.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot
-                                    .getTotalByteCount());
-                            progressDialog.setMessage("Uploaded " + (int) progress + "%");
-                        }
-                    });
+            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful())
+                    {
+                        throw task.getException();
+                    }
+                    return storageReference2.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful())
+                    {
+                        progressDialog.dismiss();
+                        Uri downloadUri = task.getResult();
+                        String mUri = downloadUri.toString();
+                        ListPhotoModel listPhotoModel = new ListPhotoModel(mUri);
+                        String ImageUploadId = databaseReference.push().getKey();
+                        databaseReference.child(ImageUploadId).setValue(listPhotoModel);
+                    }
+                    else
+                    {
+                        Toast.makeText(PhotoGalleryActivity.this, "Failed upload", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                }
+            });
+
         }
     }
 
