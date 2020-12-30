@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.home.PhotoGalleryActivity">
+
+    <ImageView
+        android:id="@+id/img_OneRecipe"
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="center"
+        android:layout_height="200dp"/>
+
+    <LinearLayout
+        android:id="@+id/layout_OneRecipe"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/name_OneRecipe"
+            android:layout_height="60dp"
+            android:layout_width="0dp"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:padding="5dp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:text="Name"/>
+
+        <TextView
+            android:id="@+id/time_OneRecipe"
+            android:layout_height="60dp"
+            android:layout_width="0dp"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:padding="5dp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:text="Time"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/ingredients_visible_OneRecipe"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textSize="20dp"
+        android:padding="5dp"
+        android:textStyle="italic"
+        android:text="Ingredients"/>
+    <TextView
+        android:id="@+id/ingredients_OneRecipe"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textSize="15dp"
+        android:padding="5dp"
+        android:textStyle="italic"
+        android:text="Ingredients_appears_here"/>
+
+
+    <TextView
+        android:id="@+id/prep_visible_OneRecipe"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textSize="20dp"
+        android:padding="5dp"
+        android:textStyle="italic"
+        android:text="How to"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/preparation_OneRecipe"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textSize="15dp"
+        android:padding="5dp"
+        android:textStyle="italic"
+        android:text="HowTo_appears_here"/>
+    </ScrollView>
+</LinearLayout>

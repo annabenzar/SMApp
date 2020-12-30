@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.R;
 
 public class ListExampleViewHolder extends RecyclerView.ViewHolder {
-    private TextView nameTv;
-    private TextView firstnameTv;
+    public TextView nameTv;
+    public TextView firstnameTv;
 
     public ListExampleViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -23,7 +23,7 @@ public class ListExampleViewHolder extends RecyclerView.ViewHolder {
         firstnameTv = itemView.findViewById(R.id.tv_row_example_firstname);
     }
 
-    public void setValues(String name, String firstname,int age){
+    public void setValues(String name, String firstname){
         nameTv.setText(name);
         firstnameTv.setText(firstname);
     }

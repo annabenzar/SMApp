@@ -1,26 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.home.PhotoGalleryActivity">
+
+    <TextView
+        android:id="@+id/text_view_upload"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="60dp"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:padding="5dp"
+        android:textStyle="bold"
+        android:text="Upload a recipe!"/>
+
+    <ImageView
+        android:id="@+id/img_View"
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:scaleType="center"
+        android:layout_height="50dp"/>
+
+    <EditText
+        android:id="@+id/name_et_upload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:textSize="15sp"
+        android:hint="Enter name"/>
+
+    <EditText
+        android:id="@+id/time_et_upload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:textSize="15sp"
+        android:hint="Enter time"/>
+    <EditText
+        android:id="@+id/type_et_upload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:textSize="15sp"
+        android:hint="Enter type"/>
+    <EditText
+        android:id="@+id/ingredients_et_upload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:textSize="15sp"
+        android:hint="Enter ingredients"/>
+    <EditText
+        android:id="@+id/preparation_et_upload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:textSize="15sp"
+        android:hint="How to"/>
 
     <LinearLayout
         android:id="@+id/buttons_layout"
         android:orientation="horizontal"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:weightSum="2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/btn_photo_choose"
-            android:text="Choose"
+            android:text="Choose Image"
             android:layout_weight="1"
-            android:layout_marginStart="7dp"
+            android:layout_marginStart="20dp"
             android:layout_marginEnd="7dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
@@ -30,29 +95,19 @@
             android:text="Upload"
             android:layout_weight="1"
             android:layout_marginStart="7dp"
-            android:layout_marginEnd="7dp"
+            android:layout_marginEnd="20dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/img_View"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_above="@+id/btn_photo_show"
-        android:layout_below="@id/buttons_layout"/>
-
-    <Button
+    <!--<Button
         android:id="@+id/btn_photo_show"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
-        android:layout_marginEnd="7dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
-        android:layout_alignParentBottom="true"
-        android:text="Show images"
-        />
+        android:text="Show images"/> -->
 
-</RelativeLayout>
+</LinearLayout>

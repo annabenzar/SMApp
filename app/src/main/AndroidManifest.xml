@@ -13,18 +13,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <!--<activity
-            android:name=".HomeScreen"
-            android:label="@string/title_activity_menu" >
-        </activity>-->
-        <activity android:name=".FirebaseLoginActivity" >
+
+        <activity android:name=".FirstPageActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".firstActivities.SecondActivity" />
         <activity android:name=".firstActivities.ThirdActivity" />
         <activity android:name=".firstActivities.FourthActivity" />
         <activity android:name=".firstActivities.RoomActivity" />
@@ -34,5 +30,7 @@
         <activity android:name=".FirebaseRegisterActivity"/>
         <activity android:name=".ui.home.PhotoGalleryActivity"/>
         <activity android:name=".ui.home.ShowGalleryActivity"/>
+        <activity android:name=".FirebaseLoginActivity"/>
+        <activity android:name=".ui.home.OneRecipeActivity"/>
     </application>
 </manifest>

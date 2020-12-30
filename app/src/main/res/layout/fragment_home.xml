@@ -142,6 +142,6 @@
         android:background="@drawable/rounded_corners"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/profile_button"
-        android:text="Upload photos"/>
+        android:text="Upload a recipe"/>
 </RelativeLayout>
 

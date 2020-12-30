@@ -34,12 +34,16 @@ public class ListExampleAdapter extends RecyclerView.Adapter<ListExampleViewHold
     @Override
     public void onBindViewHolder(@NonNull ListExampleViewHolder holder, int position) {
         final ListExampleModel listModel = exampleList.get(position);
-        holder.setValues(listModel.getFirstname(), listModel.getName(), listModel.getAge());
+
+        holder.nameTv.setText(listModel.getName());
+        holder.firstnameTv.setText(listModel.getFirstname());
+
+        //holder.setValues(listModel.getFirstname(), listModel.getName());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //ce se intampla la click pe rand
+                //ce se intampla la click pe un cardvie
             }
         });
     }

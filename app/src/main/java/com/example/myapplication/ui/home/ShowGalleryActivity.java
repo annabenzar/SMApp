@@ -14,11 +14,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import static com.example.myapplication.Helpers.FirebaseHelper.urlDatabase;
+import static com.example.myapplication.Helpers.FirebaseHelper.recipeDatabase;
 
 public class ShowGalleryActivity extends AppCompatActivity {
     RecyclerView recyclerView;
-    RecyclerView.Adapter adapter ;
+    PhotoAdapter adapter;
     List<ListPhotoModel> list = new ArrayList<>();
 
     ProgressDialog progressDialog;
@@ -28,28 +28,35 @@ public class ShowGalleryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show_gallery);
 
         recyclerView = (RecyclerView) findViewById(R.id.rv_image_list);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(ShowGalleryActivity.this));
 
         progressDialog = new ProgressDialog(ShowGalleryActivity.this);
         progressDialog.setMessage("Loading Images From Firebase.");
         progressDialog.show();
 
 
-        urlDatabase.addValueEventListener(new ValueEventListener() {
+        recipeDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
 
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
 
-                    ListPhotoModel listphoto = postSnapshot.getValue(ListPhotoModel.class);
+                    //extragere sub forma ListPhotoModel
+
+                    String nameRetrieved = String.valueOf(postSnapshot.child("imageName").getValue());
+                    String timeRetrieved = String.valueOf(postSnapshot.child("imageTime").getValue());
+                    String typeRetreived = String.valueOf(postSnapshot.child("imageType").getValue());
+                    String imageRetreived = String.valueOf(postSnapshot.child("imageURL").getValue());
+                    String ingredientsRetrieved = String.valueOf(postSnapshot.child("imageIngredients").getValue());
+                    String prepRetrieved = String.valueOf(postSnapshot.child("imagePrep").getValue());
+
+
+                    ListPhotoModel listphoto = new ListPhotoModel(imageRetreived,nameRetrieved,timeRetrieved,typeRetreived,ingredientsRetrieved,prepRetrieved);
 
                     list.add(listphoto);
                 }
 
-                adapter = new PhotoAdapter(list);
 
-                recyclerView.setAdapter(adapter);
+                setRecyclerView();
 
                 progressDialog.dismiss();
             }
@@ -62,6 +69,14 @@ public class ShowGalleryActivity extends AppCompatActivity {
         });
 
     }
+
+    public void setRecyclerView(){
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new PhotoAdapter(list);
+        recyclerView.setAdapter(adapter);
+    }
+
 }
 
 

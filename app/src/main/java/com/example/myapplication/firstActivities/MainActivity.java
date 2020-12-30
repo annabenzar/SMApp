@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void toSecondActivitiy(View view) {
-            Intent intent = new Intent(this, SecondActivity.class);
+            Intent intent = new Intent(this, ThirdActivity.class);
             startActivity(intent);
 
     }

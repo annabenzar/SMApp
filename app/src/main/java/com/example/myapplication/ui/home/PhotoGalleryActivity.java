@@ -13,7 +13,9 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.example.myapplication.Models.ListPhotoModel;
 import com.example.myapplication.R;
@@ -26,14 +28,18 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 
-import static com.example.myapplication.Helpers.FirebaseHelper.urlDatabase;
+import static com.example.myapplication.Helpers.FirebaseHelper.recipeDatabase;
 import static com.example.myapplication.Helpers.FirebaseHelper.imageStorage;
 
 
 public class PhotoGalleryActivity extends AppCompatActivity {
 
-    private Button btnChoose, btnUpload, btnShow;
+    private TextView textView;
     private ImageView imageView;
+    private EditText nameUpload,timeUpload,typeUpload, ingredientsUpload,preparationUpload;
+    private Button btnChoose, btnUpload, btnShow;
+
+
 
     private Uri filePath;
     private final int PICK_IMAGE_REQUEST = 71;
@@ -50,10 +56,20 @@ public class PhotoGalleryActivity extends AppCompatActivity {
     }
 
     public void initializeViews() {
+        textView = findViewById(R.id.text_view_upload);
+        imageView = findViewById(R.id.img_View);
+
+        nameUpload=findViewById(R.id.name_et_upload);
+        timeUpload=findViewById(R.id.time_et_upload);
+        typeUpload=findViewById(R.id.type_et_upload);
+        ingredientsUpload=findViewById(R.id.ingredients_et_upload);
+        preparationUpload=findViewById(R.id.preparation_et_upload);
+
+
         btnChoose = findViewById(R.id.btn_photo_choose);
         btnUpload = findViewById(R.id.btn_photo_upload);
-        imageView = findViewById(R.id.img_View);
-        btnShow = findViewById(R.id.btn_photo_show);
+
+        //btnShow = findViewById(R.id.btn_photo_show);
     }
 
     public void setOnClickListeners() {
@@ -71,12 +87,12 @@ public class PhotoGalleryActivity extends AppCompatActivity {
             }
         });
 
-        btnShow.setOnClickListener(new View.OnClickListener() {
+        /*btnShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(PhotoGalleryActivity.this, ShowGalleryActivity.class));
             }
-        });
+        });*/
     }
 
     private void chooseImage() {
@@ -120,6 +136,18 @@ public class PhotoGalleryActivity extends AppCompatActivity {
 
     private void uploadImage() {
 
+        final String name= nameUpload.getText().toString();
+        final String time = timeUpload.getText().toString();
+        final String type = typeUpload.getText().toString();
+        final String ingredients = ingredientsUpload.getText().toString();
+        final String prep = preparationUpload.getText().toString();
+
+        if (nameUpload.getText().toString().isEmpty() || timeUpload.getText().toString().isEmpty() || typeUpload.getText().toString().isEmpty())
+        {
+            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (filePath != null) {
             final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Uploading...");
@@ -144,9 +172,9 @@ public class PhotoGalleryActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                         Uri downloadUri = task.getResult();
                         String mUri = downloadUri.toString();
-                        ListPhotoModel listPhotoModel = new ListPhotoModel(mUri);
-                        String ImageUploadId = urlDatabase.push().getKey();
-                        urlDatabase.child(ImageUploadId).setValue(listPhotoModel);
+                        ListPhotoModel listPhotoModel = new ListPhotoModel(mUri,name,time,type,ingredients,prep);
+                        String ImageUploadId = recipeDatabase.push().getKey();
+                        recipeDatabase.child(ImageUploadId).setValue(listPhotoModel);
                     } else {
                         Toast.makeText(PhotoGalleryActivity.this, "Failed upload", Toast.LENGTH_SHORT).show();
                     }

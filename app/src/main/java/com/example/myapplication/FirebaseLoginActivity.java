@@ -37,6 +37,25 @@ public class FirebaseLoginActivity extends AppCompatActivity {
         initializeViews();
     }
 
+
+//    protected void onStart() {
+//
+//        super.onStart();
+//        // Check if user is signed in (non-null) and update UI accordingly.
+//        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+//        updateUI(currentUser);
+//
+//    }
+//    public void updateUI(FirebaseUser currentUser){
+//        if(currentUser != null){
+//            firebaseText.setText("There is a user signed in.");
+//            email_login.setText(String.valueOf(currentUser.getEmail()));
+//        }
+//        else
+//            firebaseText.setText("There is not a user signed in.");
+//    }
+
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -44,9 +63,21 @@ public class FirebaseLoginActivity extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         //logare automata
-//        if (user != null){
-//            startActivity(new Intent(FirebaseLoginActivity.this, HomeScreen.class));
-//        }
+       if (user != null){
+           FirebaseHelper.usersDatabase.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+               @Override
+               public void onDataChange(@NonNull DataSnapshot snapshot) {
+                   UserEntity userEntity = snapshot.getValue(UserEntity.class);
+                   StorageHelper.getInstance().setUserEntity(userEntity);
+                   startActivity(new Intent(FirebaseLoginActivity.this, HomeScreen.class));
+               }
+
+               @Override
+               public void onCancelled(@NonNull DatabaseError error) {
+
+               }
+           });
+        }
     }
 
     private void initializeViews() {
