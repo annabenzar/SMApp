@@ -50,8 +50,10 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoViewHolder> {
         final String urlToOneRecipe = newPhotoList.getImageURL();
         final String nameToOneRecipe = newPhotoList.getImageName();
         final String  timeToOneRecipe = newPhotoList.getImageTime();
+        final String typeOneRecipe = newPhotoList.getImageType();
         final String ingredientsToOneRecipe = newPhotoList.getImageIngredients();
         final String prepToOneRecipe = newPhotoList.getImagePrep();
+        final String authorOneRecipe = newPhotoList.getImageAuthor();
 
 
 
@@ -64,8 +66,10 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoViewHolder> {
                 bundle.putString("url",urlToOneRecipe);
                 bundle.putString("name",nameToOneRecipe);
                 bundle.putString("time",timeToOneRecipe);
+                bundle.putString("type",typeOneRecipe);
                 bundle.putString("ingredients",ingredientsToOneRecipe);
                 bundle.putString("prep",prepToOneRecipe);
+                bundle.putString("author",authorOneRecipe);
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }

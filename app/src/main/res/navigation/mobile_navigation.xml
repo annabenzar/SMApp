@@ -10,10 +10,22 @@
         android:name="com.example.myapplication.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
-
+    <fragment
+        android:id="@+id/navigation_tocook"
+        android:name="com.example.myapplication.ui.favorites.ToCookFragment"
+        android:label="@string/title_tocook"
+        tools:layout="@layout/fragment_tocook" />
+    <fragment
+        android:id="@+id/navigation_ingredients"
+        android:name="com.example.myapplication.ui.ingredients.IngredientsFragment"
+        android:label="@string/title_ingredients"
+        tools:layout="@layout/fragment_ingredients" />
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.myapplication.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
+
+
+
 </navigation>

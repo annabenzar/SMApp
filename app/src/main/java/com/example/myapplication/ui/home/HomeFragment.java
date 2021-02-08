@@ -7,21 +7,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-
 import androidx.fragment.app.Fragment;
 
+import com.example.myapplication.FirebaseLoginActivity;
 import com.example.myapplication.Helpers.StorageHelper;
 import com.example.myapplication.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeFragment extends Fragment {
 
     private TextView username,nametv,firstnametv,emailtv,agetv;
     private TextView editablename,editablefirstname,editableemail,editableage;
-    private Button button,button2;
+    private Button button,button2,button3;
 
     StorageHelper storageHelper = StorageHelper.getInstance();
+    private FirebaseAuth firebaseAuth;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
@@ -44,6 +45,7 @@ public class HomeFragment extends Fragment {
         editableage = root.findViewById(R.id.profile_yourage);
         button = root.findViewById(R.id.profile_button);
         button2 = root.findViewById(R.id.upload_button);
+        button3=root.findViewById(R.id.logout_button);
     }
 
     public void setValues(){
@@ -68,5 +70,14 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                getActivity().finish();
+                startActivity(new Intent(getContext(),FirebaseLoginActivity.class));
+            }
+        });
     }
+
 }

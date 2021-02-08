@@ -3,6 +3,8 @@
     <string name="title_activity_bottom_nav_example">HomeActivity</string>
     <string name="title_home">Profile</string>
     <string name="title_dashboard">Recipes</string>
+    <string name="title_ingredients">ToBuy</string>
+    <string name="title_tocook">ToCook</string>
     <string name="title_activity_menu">HomeActivity</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

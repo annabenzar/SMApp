@@ -6,6 +6,14 @@
         android:icon="@drawable/ic_noun_cake_365000"
         android:title="@string/title_dashboard" />
     <item
+        android:id="@+id/navigation_tocook"
+        android:icon="@drawable/ic_bake"
+        android:title="@string/title_tocook" />
+    <item
+        android:id="@+id/navigation_ingredients"
+        android:icon="@drawable/ic_note"
+        android:title="@string/title_ingredients"/>
+    <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_user"
         android:title="@string/title_home" />

@@ -6,17 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.myapplication.Helpers.StorageHelper;
 import com.example.myapplication.Models.ListPhotoModel;
 import com.example.myapplication.R;
 import com.google.android.gms.tasks.Continuation;
@@ -26,8 +25,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.IOException;
-
 import static com.example.myapplication.Helpers.FirebaseHelper.recipeDatabase;
 import static com.example.myapplication.Helpers.FirebaseHelper.imageStorage;
 
@@ -35,17 +32,15 @@ import static com.example.myapplication.Helpers.FirebaseHelper.imageStorage;
 public class PhotoGalleryActivity extends AppCompatActivity {
 
     private TextView textView;
-    private ImageView imageView;
     private EditText nameUpload,timeUpload,typeUpload, ingredientsUpload,preparationUpload;
-    private Button btnChoose, btnUpload, btnShow;
-
-
+    private Button btnChoose, btnUpload, btnChooseVideo;
 
     private Uri filePath;
-    private final int PICK_IMAGE_REQUEST = 71;
+    private final int PICK_VIDEO = 1;
 
     // Folder path for Firebase Storage.
     String Storage_Path = "Images/";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +48,11 @@ public class PhotoGalleryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_photo_gallery);
         initializeViews();
         setOnClickListeners();
+
     }
 
     public void initializeViews() {
         textView = findViewById(R.id.text_view_upload);
-        imageView = findViewById(R.id.img_View);
 
         nameUpload=findViewById(R.id.name_et_upload);
         timeUpload=findViewById(R.id.time_et_upload);
@@ -68,8 +63,6 @@ public class PhotoGalleryActivity extends AppCompatActivity {
 
         btnChoose = findViewById(R.id.btn_photo_choose);
         btnUpload = findViewById(R.id.btn_photo_upload);
-
-        //btnShow = findViewById(R.id.btn_photo_show);
     }
 
     public void setOnClickListeners() {
@@ -86,20 +79,13 @@ public class PhotoGalleryActivity extends AppCompatActivity {
                 uploadImage();
             }
         });
-
-        /*btnShow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(PhotoGalleryActivity.this, ShowGalleryActivity.class));
-            }
-        });*/
     }
 
     private void chooseImage() {
         Intent intent = new Intent(); //creates an image chooser dialog(allows user to browse through the device gallery)
-        intent.setType("image/*");
+        intent.setType("video/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST); //receive the result (selected image)
+        startActivityForResult(Intent.createChooser(intent, "Select Video"), PICK_VIDEO); //receive the result (selected video)
     }
     //for diplaying the image _ getting image path ->  onActivityResult
 
@@ -107,17 +93,11 @@ public class PhotoGalleryActivity extends AppCompatActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
-                && data != null && data.getData() != null)
-        //displaying the image
-        {
-            filePath = data.getData(); //path of the choosen image
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                imageView.setImageBitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        //PENTRU IMAGINE
+        if (requestCode == PICK_VIDEO && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
+
+            filePath = data.getData(); //path of the choosen file(image/video)
         }
     }
 
@@ -141,6 +121,7 @@ public class PhotoGalleryActivity extends AppCompatActivity {
         final String type = typeUpload.getText().toString();
         final String ingredients = ingredientsUpload.getText().toString();
         final String prep = preparationUpload.getText().toString();
+        final String recipeAuthor = StorageHelper.getInstance().getUserEntity().getFirstname()+StorageHelper.getInstance().getUserEntity().getName();
 
         if (nameUpload.getText().toString().isEmpty() || timeUpload.getText().toString().isEmpty() || typeUpload.getText().toString().isEmpty())
         {
@@ -155,6 +136,7 @@ public class PhotoGalleryActivity extends AppCompatActivity {
 
             //second storage ref
             final StorageReference storageReference2 = imageStorage.child(Storage_Path + System.currentTimeMillis() + "." + GetFileExtension(filePath));
+
             UploadTask uploadTask = storageReference2.putFile(filePath);
 
             uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -172,7 +154,7 @@ public class PhotoGalleryActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                         Uri downloadUri = task.getResult();
                         String mUri = downloadUri.toString();
-                        ListPhotoModel listPhotoModel = new ListPhotoModel(mUri,name,time,type,ingredients,prep);
+                        ListPhotoModel listPhotoModel = new ListPhotoModel(mUri,name,time,type,ingredients,prep,recipeAuthor);
                         String ImageUploadId = recipeDatabase.push().getKey();
                         recipeDatabase.child(ImageUploadId).setValue(listPhotoModel);
                     } else {

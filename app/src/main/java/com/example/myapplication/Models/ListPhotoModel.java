@@ -2,15 +2,16 @@ package com.example.myapplication.Models;
 
 public class ListPhotoModel {
 
-    private String imageURL,imageName,imageTime,imageType,imageIngredients,imagePrep;
+    private String imageURL,imageName,imageTime,imageType,imageIngredients,imagePrep,imageAuthor;
 
-    public ListPhotoModel(String imageURL,String imageName,String imageTime,String imageType,String imageIngredients, String imagePrep) {
+    public ListPhotoModel(String imageURL,String imageName,String imageTime,String imageType,String imageIngredients, String imagePrep,String imageAuthor) {
         this.imageURL = imageURL;
         this.imageName = imageName;
         this.imageTime = imageTime;
         this.imageType = imageType;
         this.imageIngredients=imageIngredients;
         this.imagePrep=imagePrep;
+        this.imageAuthor=imageAuthor;
     }
     public ListPhotoModel(){}
 
@@ -60,5 +61,13 @@ public class ListPhotoModel {
 
     public void setImagePrep(String imagePrep) {
         this.imagePrep = imagePrep;
+    }
+
+    public String getImageAuthor() {
+        return imageAuthor;
+    }
+
+    public void setImageAuthor(String imageAuthor) {
+        this.imageAuthor = imageAuthor;
     }
 }

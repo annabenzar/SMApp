@@ -63,7 +63,7 @@ public class FirebaseLoginActivity extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         //logare automata
-       if (user != null){
+       /*if (user != null){
            FirebaseHelper.usersDatabase.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                @Override
                public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -77,7 +77,7 @@ public class FirebaseLoginActivity extends AppCompatActivity {
 
                }
            });
-        }
+        }*/
     }
 
     private void initializeViews() {

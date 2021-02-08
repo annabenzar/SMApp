@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <LinearLayout
+        android:id="@+id/buttons_layout_ingredients"
+        android:orientation="horizontal"
+        android:weightSum="6"
+        android:layout_width="match_parent"
+        android:background="#d3d3d3"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/ingredient_view"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textStyle="bold"
+            android:layout_gravity="center_vertical"
+            android:text="Ingredient"/>
+
+        <TextView
+            android:id="@+id/nameRecipe_view"
+            android:layout_weight="2.6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textStyle="italic"
+            android:layout_gravity="center_vertical"
+            android:textAlignment="textEnd"
+            android:text="NameRecipe"/>
+
+        <Button
+            android:id="@+id/ingredient_btnDelete"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_weight="0.4"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic_kids_delete_button" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

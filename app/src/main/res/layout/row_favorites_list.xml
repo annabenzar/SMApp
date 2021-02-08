@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:weightSum="10"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/image_view_favorites"
+            android:layout_width="match_parent"
+            android:scaleType="center"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_height="150dp"
+            android:layout_weight="4" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="6"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/name_view_favorites"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="17dp"
+                android:textAlignment="textStart"
+                android:padding="5dp"
+                android:textStyle="bold"
+                android:text="Nume"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/time_view_favorites"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.5"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="15dp"
+                    android:textAlignment="textStart"
+                    android:padding="5dp"
+                    android:text="Timp"/>
+                <Button
+                    android:id="@+id/btnDelete_view_favorites"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="0.5"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/ic_kids_delete_button" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/type_view_favorites"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="15dp"
+                android:textAlignment="textStart"
+                android:padding="5dp"
+                android:text="Tip"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

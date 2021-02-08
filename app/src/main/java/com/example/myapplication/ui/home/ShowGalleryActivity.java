@@ -48,9 +48,9 @@ public class ShowGalleryActivity extends AppCompatActivity {
                     String imageRetreived = String.valueOf(postSnapshot.child("imageURL").getValue());
                     String ingredientsRetrieved = String.valueOf(postSnapshot.child("imageIngredients").getValue());
                     String prepRetrieved = String.valueOf(postSnapshot.child("imagePrep").getValue());
+                    String authorRetrieved = String.valueOf(postSnapshot.child("imageAuthor").getValue());
 
-
-                    ListPhotoModel listphoto = new ListPhotoModel(imageRetreived,nameRetrieved,timeRetrieved,typeRetreived,ingredientsRetrieved,prepRetrieved);
+                    ListPhotoModel listphoto = new ListPhotoModel(imageRetreived,nameRetrieved,timeRetrieved,typeRetreived,ingredientsRetrieved,prepRetrieved,authorRetrieved);
 
                     list.add(listphoto);
                 }
