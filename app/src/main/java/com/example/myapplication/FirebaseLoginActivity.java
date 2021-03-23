@@ -37,7 +37,6 @@ public class FirebaseLoginActivity extends AppCompatActivity {
         initializeViews();
     }
 
-
 //    protected void onStart() {
 //
 //        super.onStart();
@@ -55,15 +54,14 @@ public class FirebaseLoginActivity extends AppCompatActivity {
 //            firebaseText.setText("There is not a user signed in.");
 //    }
 
-
     @Override
     protected void onResume() {
         super.onResume();
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        //logare automata
-       /*if (user != null){
+        //LOGARE AUTOMATA
+       if (user != null){
            FirebaseHelper.usersDatabase.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                @Override
                public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -77,11 +75,10 @@ public class FirebaseLoginActivity extends AppCompatActivity {
 
                }
            });
-        }*/
+       }
     }
 
     private void initializeViews() {
-
         loginText = findViewById(R.id.tv_login);
         emailEt = findViewById(R.id.et_login_email);
         passwordEt = findViewById(R.id.et_login_password);
@@ -102,7 +99,7 @@ public class FirebaseLoginActivity extends AppCompatActivity {
         //preluare val
         String email = emailEt.getText().toString();
         String password = passwordEt.getText().toString();
-        //auth
+        //authentificare propriu-zisa
         loginUser(email,password);
     }
 
@@ -120,10 +117,8 @@ public class FirebaseLoginActivity extends AppCompatActivity {
                                     StorageHelper.getInstance().setUserEntity(userEntity);
                                     startActivity(new Intent(FirebaseLoginActivity.this, HomeScreen.class));
                                 }
-
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError error) {
-
                                 }
                             });
                         }

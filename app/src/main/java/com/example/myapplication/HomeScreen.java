@@ -1,24 +1,30 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.myapplication.ui.dashboard.DashboardFragment;
-import com.example.myapplication.ui.favorites.ToCookFragment;
-import com.example.myapplication.ui.home.HomeFragment;
-import com.example.myapplication.ui.ingredients.IngredientsFragment;
+import com.example.myapplication.ui.recipes.RecipesFragment;
+import com.example.myapplication.ui.toCook.ToCookFragment;
+import com.example.myapplication.ui.profile.ProfileFragment;
+import com.example.myapplication.ui.toBuy.ToBuyFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeScreen extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    private HomeFragment homeFragment;
-    private DashboardFragment dashboardFragment;
-    private IngredientsFragment ingredientsFragment;
+    private ProfileFragment profileFragment;
+    private RecipesFragment recipesFragment;
+    private ToBuyFragment toBuyFragment;
     private ToCookFragment toCookFragment;
 
     private BottomNavigationView navView;
@@ -43,21 +49,40 @@ public class HomeScreen extends AppCompatActivity implements BottomNavigationVie
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.top_nav_menu,menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.logout_item:
+                FirebaseAuth.getInstance().signOut();
+                finish();
+                startActivity(new Intent(this,FirebaseLoginActivity.class));
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.navigation_home:
-                fragmentManager.beginTransaction().hide(activeFragment).show(homeFragment).commit();
-                activeFragment = homeFragment;
+                fragmentManager.beginTransaction().hide(activeFragment).show(profileFragment).commit();
+                activeFragment = profileFragment;
                 return true;
 
             case R.id.navigation_dashboard:
-                fragmentManager.beginTransaction().hide(activeFragment).show(dashboardFragment).commit();
-                activeFragment = dashboardFragment;
+                fragmentManager.beginTransaction().hide(activeFragment).show(recipesFragment).commit();
+                activeFragment = recipesFragment;
                 return true;
 
             case R.id.navigation_ingredients:
-                fragmentManager.beginTransaction().hide(activeFragment).show(ingredientsFragment).commit();
-                activeFragment = ingredientsFragment;
+                fragmentManager.beginTransaction().hide(activeFragment).show(toBuyFragment).commit();
+                activeFragment = toBuyFragment;
                 return true;
             case R.id.navigation_tocook:
                 fragmentManager.beginTransaction().hide(activeFragment).show(toCookFragment).commit();
@@ -69,21 +94,21 @@ public class HomeScreen extends AppCompatActivity implements BottomNavigationVie
 
     private void LoadFragment(String name) {
 
-        fragmentManager.beginTransaction().add(R.id.nav_host_fragment, homeFragment, "1").hide(homeFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.nav_host_fragment, profileFragment, "1").hide(profileFragment).commit();
         fragmentManager.beginTransaction().add(R.id.nav_host_fragment, toCookFragment, "2").hide(toCookFragment).commit();
-        fragmentManager.beginTransaction().add(R.id.nav_host_fragment, ingredientsFragment, "3").hide(ingredientsFragment).commit();
-        fragmentManager.beginTransaction().add(R.id.nav_host_fragment, dashboardFragment, "4").detach(dashboardFragment).attach(dashboardFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.nav_host_fragment, toBuyFragment, "3").hide(toBuyFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.nav_host_fragment, recipesFragment, "4").detach(recipesFragment).attach(recipesFragment).commit();
         Bundle bundle = new Bundle();
         bundle.putString("key",name);
-        homeFragment.setArguments(bundle);
+        profileFragment.setArguments(bundle);
     }
 
     public void initializeViews() {
-        homeFragment = new HomeFragment();
-        dashboardFragment = new DashboardFragment();
-        ingredientsFragment = new IngredientsFragment();
+        profileFragment = new ProfileFragment();
+        recipesFragment = new RecipesFragment();
+        toBuyFragment = new ToBuyFragment();
         toCookFragment = new ToCookFragment();
         //ia val primului fragment
-        activeFragment = dashboardFragment;
+        activeFragment = recipesFragment;
     }
 }

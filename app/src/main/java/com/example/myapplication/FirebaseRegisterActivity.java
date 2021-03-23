@@ -29,7 +29,7 @@ public class FirebaseRegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_firebase);
+        setContentView(R.layout.activity_firebase_register);
         initializeViews();
         firebaseAuth = FirebaseAuth.getInstance();
     }
@@ -66,6 +66,7 @@ public class FirebaseRegisterActivity extends AppCompatActivity {
 
 
     public void registerUser(final String name, final String firstname, final String email, final String age, final String password){
+
         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -74,7 +75,8 @@ public class FirebaseRegisterActivity extends AppCompatActivity {
                     if (user == null){
                         return;
                     }
-                    UserEntity userEntity = new UserEntity(name,firstname,email,age,password);
+                    final String idUser = user.getUid();
+                    UserEntity userEntity = new UserEntity(idUser,name,firstname,email,age,password);
                     usersDatabase.child(user.getUid()).setValue(userEntity);
                     startActivity(new Intent(FirebaseRegisterActivity.this, FirebaseLoginActivity.class));
                 }

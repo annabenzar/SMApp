@@ -4,7 +4,7 @@ import com.example.myapplication.Models.UserEntity;
 
 public class StorageHelper {
     private static StorageHelper instance;
-    private  UserEntity userEntity;
+    private UserEntity userEntity;
 
     public static  StorageHelper getInstance(){
         if(instance ==null){

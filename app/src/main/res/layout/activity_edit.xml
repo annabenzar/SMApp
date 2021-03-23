@@ -6,10 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/fragment"
-    tools:context="ui.home.HomeFragment">
+    tools:context=".ui.profile.ProfileFragment">
 
     <TextView
-        android:id="@+id/text_home"
+        android:id="@+id/text_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -20,7 +20,7 @@
         android:textSize="25sp"
         android:text="Edit profile!" />
     <TextView
-        android:id="@+id/profile_name"
+        android:id="@+id/edit_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -28,20 +28,20 @@
         android:layout_marginEnd="20dp"
         android:textStyle="bold"
         android:textSize="15sp"
-        android:layout_below="@+id/text_home"
+        android:layout_below="@+id/text_edit"
         android:text="Name: " />
     <EditText
-        android:id="@+id/profile_yourname"
+        android:id="@+id/edit_yourname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
         android:textSize="15sp"
-        android:layout_below="@+id/profile_name"
+        android:layout_below="@+id/edit_name"
         android:hint="Enter name" />
     <TextView
-        android:id="@+id/profile_firstname"
+        android:id="@+id/edit_firstname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -49,20 +49,20 @@
         android:layout_marginEnd="20dp"
         android:textStyle="bold"
         android:textSize="15sp"
-        android:layout_below="@+id/profile_yourname"
+        android:layout_below="@+id/edit_yourname"
         android:text="Firstname: " />
     <EditText
-        android:id="@+id/profile_yourfirstname"
+        android:id="@+id/edit_yourfirstname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
         android:textSize="15sp"
-        android:layout_below="@+id/profile_firstname"
+        android:layout_below="@+id/edit_firstname"
         android:hint="Enter firstname" />
     <TextView
-        android:id="@+id/profile_email"
+        android:id="@+id/edit_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -70,20 +70,20 @@
         android:layout_marginEnd="20dp"
         android:textStyle="bold"
         android:textSize="15sp"
-        android:layout_below="@+id/profile_yourfirstname"
+        android:layout_below="@+id/edit_yourfirstname"
         android:text="E-mail: " />
     <EditText
-        android:id="@+id/profile_youremail"
+        android:id="@+id/edit_youremail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
         android:textSize="15sp"
-        android:layout_below="@+id/profile_email"
+        android:layout_below="@+id/edit_email"
         android:hint="Enter email"/>
     <TextView
-        android:id="@+id/profile_age"
+        android:id="@+id/edit_age"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -91,20 +91,20 @@
         android:layout_marginEnd="20dp"
         android:textStyle="bold"
         android:textSize="15sp"
-        android:layout_below="@+id/profile_youremail"
+        android:layout_below="@+id/edit_youremail"
         android:text="Age: " />
     <EditText
-        android:id="@+id/profile_yourage"
+        android:id="@+id/edit_yourage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
         android:textSize="15sp"
-        android:layout_below="@+id/profile_age"
+        android:layout_below="@+id/edit_age"
         android:hint="Enter age" />
     <TextView
-        android:id="@+id/profile_password"
+        android:id="@+id/edit_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -112,27 +112,27 @@
         android:layout_marginEnd="20dp"
         android:textStyle="bold"
         android:textSize="15sp"
-        android:layout_below="@+id/profile_yourage"
+        android:layout_below="@+id/edit_yourage"
         android:text="Password: " />
     <EditText
-        android:id="@+id/profile_yourpassword"
+        android:id="@+id/edit_yourpassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
         android:textSize="15sp"
-        android:layout_below="@+id/profile_password"
+        android:layout_below="@+id/edit_password"
         android:inputType="textPassword"
         android:hint="Enter password" />
     <Button
-        android:id="@+id/profile_button"
+        android:id="@+id/edit_button"
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:layout_margin="20dp"
         android:background="@drawable/rounded_corners"
         android:textColor="#FFFFFF"
-        android:layout_below="@+id/profile_yourpassword"
+        android:layout_below="@+id/edit_yourpassword"
         android:text="Done"/>
 </RelativeLayout>
 

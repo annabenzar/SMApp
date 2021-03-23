@@ -21,16 +21,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".firstActivities.ThirdActivity" />
-        <activity android:name=".firstActivities.FourthActivity" />
-        <activity android:name=".firstActivities.RoomActivity" />
-        <activity android:name=".firstActivities.MainActivity" />
+
         <activity android:name=".HomeScreen"/>
-        <activity android:name=".ui.home.EditActivity"/>
+        <activity android:name=".ui.profile.EditActivity"/>
+        <activity android:name=".ui.profile.SearchActivity"/>
         <activity android:name=".FirebaseRegisterActivity"/>
-        <activity android:name=".ui.home.PhotoGalleryActivity"/>
-        <activity android:name=".ui.home.ShowGalleryActivity"/>
+        <activity android:name=".ui.profile.UploadARecipeActivity"/>
         <activity android:name=".FirebaseLoginActivity"/>
-        <activity android:name=".ui.home.OneRecipeActivity"/>
+        <activity android:name=".OneRecipeActivity"/>
     </application>
 </manifest>

@@ -12,15 +12,7 @@ public class ListIngredientModel {
         return ingredient;
     }
 
-    public void setIngredient(String ingredient) {
-        this.ingredient = ingredient;
-    }
-
     public String getNameRecipe() {
         return nameRecipe;
-    }
-
-    public void setNameRecipe(String nameRecipe) {
-        this.nameRecipe = nameRecipe;
     }
 }

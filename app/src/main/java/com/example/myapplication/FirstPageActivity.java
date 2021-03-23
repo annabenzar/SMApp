@@ -40,6 +40,5 @@ public class FirstPageActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this , FirebaseLoginActivity.class);
         startActivity(intent);
-
     }
 }
