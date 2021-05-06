@@ -17,6 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
+import static com.example.myapplication.Helpers.FirebaseHelper.familyDatabase;
 import static com.example.myapplication.Helpers.FirebaseHelper.ingredientsDatabase;
 
 public class ToBuyAdapter extends RecyclerView.Adapter<ToBuyViewHolder> {
@@ -38,7 +39,7 @@ public class ToBuyAdapter extends RecyclerView.Adapter<ToBuyViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ToBuyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ToBuyViewHolder holder, final int position) {
         final ListIngredientModel newIngredientsList = ingredientsList.get(position);
 
         holder.ingredient.setText(newIngredientsList.getIngredient());
@@ -47,30 +48,57 @@ public class ToBuyAdapter extends RecyclerView.Adapter<ToBuyViewHolder> {
         holder.deleteIngredientButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //ce se intampla la click pe un cardview
 
-                final String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                DatabaseReference oneUserIngredients = ingredientsDatabase.child(currentUser);
-
-                oneUserIngredients.addValueEventListener(new ValueEventListener() {
+                final String mUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                final int[] foundInAFam={0};
+                //cautare in familie
+                familyDatabase.addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot snapshot) {
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot postsnapshot : snapshot.getChildren()){
+                            for(DataSnapshot newpostsnapshot : postsnapshot.getChildren()){
+                                String userId =newpostsnapshot.getKey();
+                                if(userId.equals(mUser)){
+                                    foundInAFam[0]=1;
 
-                        for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                                    String familyGroupId = postsnapshot.getKey();
 
-                            //cautare cheie cu ingredientul cautat
-                            String ingredientRetrieved = String.valueOf(postSnapshot.child("ingredient").getValue());
+                                    DatabaseReference oneUserIngredients = ingredientsDatabase.child(familyGroupId);
 
-                            if(ingredientRetrieved.equals(newIngredientsList.getIngredient())){
-                                postSnapshot.child("ingredient").getRef().removeValue();
-                                postSnapshot.child("nameRecipe").getRef().removeValue();
+                                    oneUserIngredients.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot snapshot) {
+
+                                            for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+
+                                                //cautare cheie cu ingredientul cautat
+                                                String ingredientRetrieved = String.valueOf(postSnapshot.child("ingredient").getValue());
+
+                                                if(ingredientRetrieved.equals(newIngredientsList.getIngredient())){
+                                                    postSnapshot.child("ingredient").getRef().removeValue();
+                                                    postSnapshot.child("nameRecipe").getRef().removeValue();
+                                                }
+                                            }
+                                        }
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+                                        }
+                                    });
+                                    break;
+                                }
+                            }
+                            if(foundInAFam[0]==1){
+                                break;
                             }
                         }
                     }
+
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                    public void onCancelled(@NonNull DatabaseError error) {
+
                     }
                 });
+
             }
         });
     }

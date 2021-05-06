@@ -22,7 +22,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
+import static com.example.myapplication.Helpers.FirebaseHelper.familyDatabase;
 import static com.example.myapplication.Helpers.FirebaseHelper.favoritesDatabase;
+import static com.example.myapplication.Helpers.FirebaseHelper.ingredientsDatabase;
 
 public class ToCookAdapter extends RecyclerView.Adapter<ToCookViewHolder>{
 
@@ -88,33 +90,61 @@ public class ToCookAdapter extends RecyclerView.Adapter<ToCookViewHolder>{
             @Override
             public void onClick(View v) {
                 //ce se intampla la click pe un cardview
-                final String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                DatabaseReference favoriteRecipes = favoritesDatabase.child(currentUser);
-
-                favoriteRecipes.addValueEventListener(new ValueEventListener() {
+                final String mUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                final int[] foundInAFam={0};
+                //cautare in familie
+                familyDatabase.addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot snapshot) {
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot postsnapshot : snapshot.getChildren()){
+                            for(DataSnapshot newpostsnapshot : postsnapshot.getChildren()){
+                                String userId =newpostsnapshot.getKey();
+                                if(userId.equals(mUser)){
+                                    foundInAFam[0]=1;
 
-                        for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                                    String familyGroupId = postsnapshot.getKey();
+                                    DatabaseReference favoriteRecipes = favoritesDatabase.child(familyGroupId);
 
-                            //cautare cheie cu ingredientul cautat
-                            String recipeRetrieved = String.valueOf(postSnapshot.child("recipeName").getValue());
+                                    favoriteRecipes.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot snapshot) {
 
-                            if(recipeRetrieved.equals(newToCookList.getRecipeName())){
-                                postSnapshot.child("recipeAuthor").getRef().removeValue();
-                                postSnapshot.child("recipeIngredients").getRef().removeValue();
-                                postSnapshot.child("recipeName").getRef().removeValue();
-                                postSnapshot.child("recipePrep").getRef().removeValue();
-                                postSnapshot.child("recipeTime").getRef().removeValue();
-                                postSnapshot.child("recipeType").getRef().removeValue();
-                                postSnapshot.child("recipeURL").getRef().removeValue();
+                                            for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+
+                                                //cautare cheie cu ingredientul cautat
+                                                String recipeRetrieved = String.valueOf(postSnapshot.child("recipeName").getValue());
+
+                                                if(recipeRetrieved.equals(newToCookList.getRecipeName())){
+                                                    postSnapshot.child("recipeAuthor").getRef().removeValue();
+                                                    postSnapshot.child("recipeIngredients").getRef().removeValue();
+                                                    postSnapshot.child("recipeName").getRef().removeValue();
+                                                    postSnapshot.child("recipePrep").getRef().removeValue();
+                                                    postSnapshot.child("recipeTime").getRef().removeValue();
+                                                    postSnapshot.child("recipeType").getRef().removeValue();
+                                                    postSnapshot.child("recipeURL").getRef().removeValue();
+                                                }
+                                            }
+                                        }
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+                                        }
+                                    });
+
+                                    break;
+                                }
+                            }
+                            if(foundInAFam[0]==1){
+                                break;
                             }
                         }
                     }
+
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                    public void onCancelled(@NonNull DatabaseError error) {
+
                     }
                 });
+
             }
         });
     }

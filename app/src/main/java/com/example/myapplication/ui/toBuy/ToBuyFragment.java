@@ -21,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.myapplication.Helpers.FirebaseHelper.familyDatabase;
 import static com.example.myapplication.Helpers.FirebaseHelper.ingredientsDatabase;
 
 public class ToBuyFragment extends Fragment {
@@ -34,30 +35,59 @@ public class ToBuyFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_tobuy, container, false);
 
         recyclerView = (RecyclerView) root.findViewById(R.id.rv_tobuy_list);
-        final String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference oneUserIngredients = ingredientsDatabase.child(currentUser);
+        final String mUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        final int[] foundInAFam={0};
 
-        oneUserIngredients.addValueEventListener(new ValueEventListener() {
+        familyDatabase.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                list.removeAll(list);
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot postsnapshot :snapshot.getChildren()){
+                    for(DataSnapshot newpostsnapshot : postsnapshot.getChildren()){
+                        String userId = newpostsnapshot.getKey();
+                        if(userId.equals(mUser)){
+                            foundInAFam[0]=1;
 
-                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                            String familyGroupId = postsnapshot.getKey();
 
-                    //extragere sub forma ListIngredientModel
-                    String ingredientRetrieved = String.valueOf(postSnapshot.child("ingredient").getValue());
-                    String nameRetrieved = String.valueOf(postSnapshot.child("nameRecipe").getValue());
+                            DatabaseReference oneUserIngredients = ingredientsDatabase.child(familyGroupId);
 
-                    ListIngredientModel listIngredientModel = new ListIngredientModel(ingredientRetrieved,nameRetrieved);
+                            oneUserIngredients.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot snapshot) {
+                                    list.removeAll(list);
 
-                    list.add(listIngredientModel);
+                                    for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+
+                                        //extragere sub forma ListIngredientModel
+                                        String ingredientRetrieved = String.valueOf(postSnapshot.child("ingredient").getValue());
+                                        String nameRetrieved = String.valueOf(postSnapshot.child("nameRecipe").getValue());
+
+                                        ListIngredientModel listIngredientModel = new ListIngredientModel(ingredientRetrieved,nameRetrieved);
+
+                                        list.add(listIngredientModel);
+                                    }
+                                    setRecyclerView();
+                                }
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                }
+                            });
+
+                            break;
+                        }
+                    }
+                    if (foundInAFam[0]==1){
+                        break;
+                    }
                 }
-                setRecyclerView();
             }
+
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
+
         return root;
     }
 

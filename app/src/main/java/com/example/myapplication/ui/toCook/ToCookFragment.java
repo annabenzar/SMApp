@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.myapplication.Helpers.FirebaseHelper.familyDatabase;
 import static com.example.myapplication.Helpers.FirebaseHelper.favoritesDatabase;
 
 public class ToCookFragment extends Fragment {
@@ -36,35 +37,66 @@ public class ToCookFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_tocook, container, false);
 
         recyclerView = (RecyclerView) root.findViewById(R.id.rv_tocook_list);
-        final String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference onefavoritesRecipes = favoritesDatabase.child(currentUser);
+        final String mUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        final int[] foundInAFam={0};
 
-        onefavoritesRecipes.addValueEventListener(new ValueEventListener() {
+        //obtinerea id-ului familiei mele
+        familyDatabase.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                list.removeAll(list);
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot postsnapshot : snapshot.getChildren()){
+                    for(DataSnapshot newpostsnapshot : postsnapshot.getChildren()){
+                        String userID = newpostsnapshot.getKey();
+                        if(userID.equals(mUser)){
+                            foundInAFam[0]=1;
+                            //preiau id-ul familiei
+                            String familyGroupId = postsnapshot.getKey();
 
-                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                            //extrag dupa el din favoritesTable
+                            DatabaseReference onefavoritesRecipes = favoritesDatabase.child(familyGroupId);
 
-                    //extragere sub forma ListRecipeModel
-                    String nameRetrieved = String.valueOf(postSnapshot.child("recipeName").getValue());
-                    String timeRetrieved = String.valueOf(postSnapshot.child("recipeTime").getValue());
-                    String typeRetreived = String.valueOf(postSnapshot.child("recipeType").getValue());
-                    String imageRetreived = String.valueOf(postSnapshot.child("recipeURL").getValue());
-                    String ingredientsRetrieved = String.valueOf(postSnapshot.child("recipeIngredients").getValue());
-                    String prepRetrieved = String.valueOf(postSnapshot.child("recipePrep").getValue());
-                    String authorRetrieved = String.valueOf(postSnapshot.child("recipeAuthor").getValue());
+                            onefavoritesRecipes.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot snapshot) {
+                                    list.removeAll(list);
 
-                    ListRecipeModel listphoto = new ListRecipeModel(imageRetreived,nameRetrieved,timeRetrieved,typeRetreived,ingredientsRetrieved,prepRetrieved,authorRetrieved);
+                                    for (DataSnapshot postSnapshot : snapshot.getChildren()) {
 
-                    list.add(listphoto);
+                                        //extragere sub forma ListRecipeModel
+                                        String nameRetrieved = String.valueOf(postSnapshot.child("recipeName").getValue());
+                                        String timeRetrieved = String.valueOf(postSnapshot.child("recipeTime").getValue());
+                                        String typeRetreived = String.valueOf(postSnapshot.child("recipeType").getValue());
+                                        String imageRetreived = String.valueOf(postSnapshot.child("recipeURL").getValue());
+                                        String ingredientsRetrieved = String.valueOf(postSnapshot.child("recipeIngredients").getValue());
+                                        String prepRetrieved = String.valueOf(postSnapshot.child("recipePrep").getValue());
+                                        String authorRetrieved = String.valueOf(postSnapshot.child("recipeAuthor").getValue());
+
+                                        ListRecipeModel listphoto = new ListRecipeModel(imageRetreived,nameRetrieved,timeRetrieved,typeRetreived,ingredientsRetrieved,prepRetrieved,authorRetrieved);
+
+                                        list.add(listphoto);
+                                    }
+                                    setRecyclerView();
+                                }
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                }
+                            });
+
+                            break;
+                        }
+                    }
+                    if(foundInAFam[0]==1){
+                        break;
+                    }
                 }
-                setRecyclerView();
             }
+
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
+
         return root;
     }
 

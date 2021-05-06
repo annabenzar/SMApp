@@ -9,11 +9,17 @@ import android.widget.Button;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication.Models.ListIngredientModel;
 import com.example.myapplication.Models.ListRecipeModel;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
+import static com.example.myapplication.Helpers.FirebaseHelper.familyDatabase;
 import static com.example.myapplication.Helpers.FirebaseHelper.favoritesDatabase;
 import static com.example.myapplication.Helpers.FirebaseHelper.ingredientsDatabase;
 
@@ -83,19 +89,49 @@ public class OneRecipeActivity extends AppCompatActivity {
     }
 
     public void insertToDatabaseTable(){
-        //incarcare ingrediente in baza de date
-        String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String[] result = ingredients.split("[\\r?\\n]+");
-        for(String s : result){
-            ListIngredientModel listIngredientModel = new ListIngredientModel(s,name);
-            String ingredientId = ingredientsDatabase.push().getKey();
-            ingredientsDatabase.child(currentUser).child(ingredientId).setValue(listIngredientModel);
-        }
+        final String mUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        final int[] foundInAFamily= {0};
 
-        //incarcare reteta in lista de favorite(tocook)
-        ListRecipeModel listRecipeModel = new ListRecipeModel(imgUrl,name,time,type,ingredients,prep,author);
-        String recipeId = favoritesDatabase.push().getKey();
-        favoritesDatabase.child(currentUser).child(recipeId).setValue(listRecipeModel);
+        //cautarea codului familiei mele
+        //ma caut in tabela de familii prima data
+        familyDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot postsnapshot : snapshot.getChildren()){
+                    for(DataSnapshot newpostsnapshot : postsnapshot.getChildren()){
+                        String userID = newpostsnapshot.getKey();
+                        if(userID.equals(mUser)){
+                            String familyGroupId = postsnapshot.getKey(); //preluarea id-ului grupului
+
+                            //incarcare ingrediente in baza de date
+                            String[] result = ingredients.split("[\\r?\\n]+");
+                            for(String s : result){
+                                ListIngredientModel listIngredientModel = new ListIngredientModel(s,name);
+                                String ingredientId = ingredientsDatabase.push().getKey();
+                                ingredientsDatabase.child(familyGroupId).child(ingredientId).setValue(listIngredientModel);
+                            }
+
+                            //incarcare reteta in lista de favorite(tocook)
+                            ListRecipeModel listRecipeModel = new ListRecipeModel(imgUrl,name,time,type,ingredients,prep,author);
+                            String recipeId = favoritesDatabase.push().getKey();
+                            favoritesDatabase.child(familyGroupId).child(recipeId).setValue(listRecipeModel);
+                            foundInAFamily[0]=1;
+                            break;
+                        }
+                    }
+                    if(foundInAFamily[0]==1){
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
     }
 
     public void setOnClickListeners() {
