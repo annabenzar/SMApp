@@ -13,5 +13,6 @@ public class FirebaseHelper {
     public static final DatabaseReference ingredientsDatabase = FirebaseDatabase.getInstance().getReference("ingredientsTable");
     public static final DatabaseReference favoritesDatabase = FirebaseDatabase.getInstance().getReference("favoritesTable");
     public static final DatabaseReference requestsDatabase = FirebaseDatabase.getInstance().getReference("requestsTable");
+    public static final DatabaseReference familyDatabase = FirebaseDatabase.getInstance().getReference("familyTable");
     public static final StorageReference imageStorage = FirebaseStorage.getInstance().getReference();
 }

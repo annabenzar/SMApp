@@ -98,16 +98,16 @@ public class ToCookAdapter extends RecyclerView.Adapter<ToCookViewHolder>{
                         for (DataSnapshot postSnapshot : snapshot.getChildren()) {
 
                             //cautare cheie cu ingredientul cautat
-                            String recipeRetrieved = String.valueOf(postSnapshot.child("imageName").getValue());
+                            String recipeRetrieved = String.valueOf(postSnapshot.child("recipeName").getValue());
 
                             if(recipeRetrieved.equals(newToCookList.getRecipeName())){
-                                postSnapshot.child("imageAuthor").getRef().removeValue();
-                                postSnapshot.child("imageIngredients").getRef().removeValue();
-                                postSnapshot.child("imageName").getRef().removeValue();
-                                postSnapshot.child("imagePrep").getRef().removeValue();
-                                postSnapshot.child("imageTime").getRef().removeValue();
-                                postSnapshot.child("imageType").getRef().removeValue();
-                                postSnapshot.child("imageURL").getRef().removeValue();
+                                postSnapshot.child("recipeAuthor").getRef().removeValue();
+                                postSnapshot.child("recipeIngredients").getRef().removeValue();
+                                postSnapshot.child("recipeName").getRef().removeValue();
+                                postSnapshot.child("recipePrep").getRef().removeValue();
+                                postSnapshot.child("recipeTime").getRef().removeValue();
+                                postSnapshot.child("recipeType").getRef().removeValue();
+                                postSnapshot.child("recipeURL").getRef().removeValue();
                             }
                         }
                     }

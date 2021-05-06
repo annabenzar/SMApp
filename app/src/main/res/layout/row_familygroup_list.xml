@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <LinearLayout
+        android:id="@+id/familyGroup_layout_users"
+        android:orientation="horizontal"
+        android:weightSum="8"
+        android:layout_width="match_parent"
+        android:background="#d3d3d3"
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/nameUser_familyGroup_view"
+            android:layout_weight="2.4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textStyle="bold"
+            android:layout_gravity="center_vertical"
+            android:text="Name"/>
+
+        <TextView
+            android:id="@+id/firstNameUser_familyGroup_view"
+            android:layout_weight="2.4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textStyle="italic"
+            android:layout_gravity="center_vertical"
+            android:textAlignment="textStart"
+            android:text="Firstname"
+            tools:ignore="RtlCompat" />
+
+        <TextView
+            android:id="@+id/status_familyGroup_view"
+            android:layout_weight="2.4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textStyle="italic"
+            android:layout_gravity="center_vertical"
+            android:visibility="invisible"
+            android:textColor="@color/adminColor"
+            android:text="Status"/>
+
+        <Button
+            android:id="@+id/detele_familyGroup_btn"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_weight="0.4"
+            android:layout_gravity="center_vertical"
+            android:visibility="invisible"
+            android:background="@drawable/ic_kids_delete_button" />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

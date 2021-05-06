@@ -21,7 +21,7 @@ public class ProfileFragment extends Fragment {
 
     private TextView username,nametv,firstnametv,emailtv,agetv;
     private TextView editablename,editablefirstname,editableemail,editableage;
-    private Button buttonAddEditData, buttonUploadRecipe,buttonSearchFam;
+    private Button buttonAddEditData, buttonUploadRecipe,buttonSearchFam,buttonSeeRequests;
 
     StorageHelper storageHelper = StorageHelper.getInstance();
     private FirebaseAuth firebaseAuth;
@@ -54,6 +54,7 @@ public class ProfileFragment extends Fragment {
         buttonAddEditData = root.findViewById(R.id.addEditData_button);
         buttonUploadRecipe = root.findViewById(R.id.uploadRecipe_button);
         buttonSearchFam = root.findViewById(R.id.searchFam_button);
+        buttonSeeRequests = root.findViewById(R.id.seeRequest_button);
     }
 
     public void setValues(){
@@ -82,6 +83,13 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), SearchActivity.class);
+                startActivity(intent);
+            }
+        });
+        buttonSeeRequests.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),RequestsActivity.class);
                 startActivity(intent);
             }
         });

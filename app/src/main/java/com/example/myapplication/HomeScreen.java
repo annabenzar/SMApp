@@ -56,6 +56,9 @@ public class HomeScreen extends AppCompatActivity implements BottomNavigationVie
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
+            case R.id.seeFam:
+                startActivity(new Intent(this,FamilyGroupActivity.class));
+                return true;
             case R.id.logout_item:
                 FirebaseAuth.getInstance().signOut();
                 finish();

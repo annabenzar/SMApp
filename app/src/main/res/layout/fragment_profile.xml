@@ -124,7 +124,7 @@
         android:id="@+id/layout_buttons_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:orientation="horizontal"
         android:layout_below="@id/profile_yourage"
         android:weightSum="2">
@@ -151,17 +151,37 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/searchFam_button"
-        android:layout_width="300dp"
+    <LinearLayout
+        android:id="@+id/layout_buttons_profile2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_marginTop="7dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="1dp"
-        android:layout_height="50dp"
-        android:background="@drawable/rounded_corners"
-        android:textColor="#FFFFFF"
         android:layout_below="@id/layout_buttons_profile"
-        android:text="Search fam mermbers"/>
+        android:weightSum="2">
 
+        <Button
+            android:id="@+id/searchFam_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="1dp"
+            android:layout_marginEnd="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_corners"
+            android:text="Search fam "
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/seeRequest_button"
+            android:layout_weight="1"
+            android:layout_marginStart="1dp"
+            android:layout_marginEnd="2dp"
+            android:layout_height="50dp"
+            android:layout_width="0dp"
+            android:background="@drawable/rounded_corners"
+            android:textColor="#FFFFFF"
+            android:text="See Requests"/>
+
+    </LinearLayout>
 </RelativeLayout>
 

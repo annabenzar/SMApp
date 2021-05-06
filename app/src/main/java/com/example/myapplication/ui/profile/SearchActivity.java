@@ -6,7 +6,10 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -123,11 +126,11 @@ public class SearchActivity extends AppCompatActivity {
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     UserEntity userEntity = postSnapshot.getValue(UserEntity.class);
 
+                    //nu afisez user-ul curent, cel care e pe aplicatie si cauta alti useri
                     if(!(userEntity.getId().equals(fUser.getUid()))){
                         if((userEntity.getName().toLowerCase().contains(s))||(userEntity.getFirstname().toLowerCase().contains(s))){
                             list.add(userEntity);
                         }
-
                     }
                     adapter = new UsersAdapter(list);
                     adapter.notifyDataSetChanged();
@@ -139,4 +142,6 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

@@ -12,11 +12,11 @@
         android:weightSum="6"
         android:layout_width="match_parent"
         android:background="#d3d3d3"
-        android:layout_height="wrap_content">
+        android:layout_height="50dp">
 
         <TextView
             android:id="@+id/nameUser_view"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="5dp"
@@ -26,7 +26,7 @@
 
         <TextView
             android:id="@+id/firstNameUser_view"
-            android:layout_weight="2"
+            android:layout_weight="1.4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="5dp"
@@ -35,17 +35,67 @@
             android:textAlignment="textStart"
             android:text="Firstname"
             tools:ignore="RtlCompat" />
-        <Button
-            android:id="@+id/button_addFam"
+        <RelativeLayout
+            android:id="@+id/realtiveLayout_buttons"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:padding="5dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="5dp"
-            android:layout_gravity="center_vertical"
-            android:text="ADD"
-            />
+            android:layout_height="match_parent"
+            android:layout_weight="3.6">
+
+            <TextView
+                android:id="@+id/alreadyFam_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textSize="18dp"
+                android:layout_centerInParent="true"
+                android:textStyle="italic"
+                android:visibility="invisible"
+                android:text="Your family"/>
+
+            <TextView
+                android:id="@+id/alreadyInOtherGroup_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textSize="16dp"
+                android:layout_centerInParent="true"
+                android:textStyle="italic"
+                android:visibility="invisible"
+                android:text="Already in other group"/>
+
+            <Button
+                android:id="@+id/button_search_accept"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_alignParentRight="true"
+                android:padding="5dp"
+                android:visibility="invisible"
+                android:text="ACCEPT"/>
+
+            <Button
+                android:id="@+id/button_addFam"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_alignParentRight="true"
+                android:padding="5dp"
+                android:visibility="invisible"
+                android:text="INVITE" />
+            <Button
+                android:id="@+id/button_cancelFam"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_alignParentRight="true"
+                android:padding="5dp"
+                android:visibility="invisible"
+                android:text="CANCEL" />
+
+        </RelativeLayout>
 
     </LinearLayout>
 

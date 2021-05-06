@@ -29,5 +29,7 @@
         <activity android:name=".ui.profile.UploadARecipeActivity"/>
         <activity android:name=".FirebaseLoginActivity"/>
         <activity android:name=".OneRecipeActivity"/>
+        <activity android:name=".ui.profile.RequestsActivity"/>
+        <activity android:name=".FamilyGroupActivity"/>
     </application>
 </manifest>

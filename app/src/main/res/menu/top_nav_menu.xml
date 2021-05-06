@@ -5,4 +5,9 @@
     <item android:id="@+id/logout_item"
         android:title="LogOut"
         app:showAsAction="never"/>
+
+    <item android:id="@+id/seeFam"
+        android:title="See your fam group"
+        app:showAsAction="never"/>
+
 </menu>
