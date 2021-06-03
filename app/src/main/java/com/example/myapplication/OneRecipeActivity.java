@@ -92,8 +92,7 @@ public class OneRecipeActivity extends AppCompatActivity {
         final String mUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
         final int[] foundInAFamily= {0};
 
-        //cautarea codului familiei mele
-        //ma caut in tabela de familii prima data
+        //cautare in tabela de familii
         familyDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

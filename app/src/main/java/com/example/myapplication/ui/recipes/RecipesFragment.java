@@ -48,13 +48,13 @@ public class RecipesFragment extends Fragment {
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
 
                     //extragere sub forma ListRecipeModel
-                    String nameRetrieved = String.valueOf(postSnapshot.child("imageName").getValue());
-                    String timeRetrieved = String.valueOf(postSnapshot.child("imageTime").getValue());
-                    String typeRetreived = String.valueOf(postSnapshot.child("imageType").getValue());
-                    String imageRetreived = String.valueOf(postSnapshot.child("imageURL").getValue());
-                    String ingredientsRetrieved = String.valueOf(postSnapshot.child("imageIngredients").getValue());
-                    String prepRetrieved = String.valueOf(postSnapshot.child("imagePrep").getValue());
-                    String authorRetrieved = String.valueOf(postSnapshot.child("imageAuthor").getValue());
+                    String nameRetrieved = String.valueOf(postSnapshot.child("recipeName").getValue());
+                    String timeRetrieved = String.valueOf(postSnapshot.child("recipeTime").getValue());
+                    String typeRetreived = String.valueOf(postSnapshot.child("recipeType").getValue());
+                    String imageRetreived = String.valueOf(postSnapshot.child("recipeURL").getValue());
+                    String ingredientsRetrieved = String.valueOf(postSnapshot.child("recipeIngredients").getValue());
+                    String prepRetrieved = String.valueOf(postSnapshot.child("recipePrep").getValue());
+                    String authorRetrieved = String.valueOf(postSnapshot.child("recipeAuthor").getValue());
 
                     ListRecipeModel listphoto = new ListRecipeModel(imageRetreived,nameRetrieved,timeRetrieved,typeRetreived,ingredientsRetrieved,prepRetrieved,authorRetrieved);
 

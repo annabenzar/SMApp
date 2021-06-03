@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 import com.example.myapplication.Models.UserEntity;
 import com.example.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -52,6 +54,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersViewHolder> {
         final FirebaseUser mUser= FirebaseAuth.getInstance().getCurrentUser(); //user-ul curent conectat
         final String currentUserID = newUsersList.getId(); //user-ul curent din lista
 
+        Glide.with(context).load(newUsersList.getProfilePicURL()).into(holder.profilePicImage);
 
         holder.nameUserView.setText(newUsersList.getName());
         holder.firstNameUserView.setText(newUsersList.getFirstname());

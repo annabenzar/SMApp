@@ -8,10 +8,12 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.myapplication.FirebaseLoginActivity;
 import com.example.myapplication.Helpers.StorageHelper;
 import com.example.myapplication.R;
@@ -21,7 +23,8 @@ public class ProfileFragment extends Fragment {
 
     private TextView username,nametv,firstnametv,emailtv,agetv;
     private TextView editablename,editablefirstname,editableemail,editableage;
-    private Button buttonAddEditData, buttonUploadRecipe,buttonSearchFam,buttonSeeRequests;
+    private Button buttonAddEditData, buttonUploadRecipe;
+    private ImageView profilePic;
 
     StorageHelper storageHelper = StorageHelper.getInstance();
     private FirebaseAuth firebaseAuth;
@@ -39,6 +42,8 @@ public class ProfileFragment extends Fragment {
     public void initializeViews(View root){
         username = root.findViewById(R.id.name_home);
 
+        profilePic = root.findViewById(R.id.profilePic_view);
+
         nametv = root.findViewById(R.id.profile_name);
         editablename = root.findViewById(R.id.profile_yourname);
 
@@ -53,11 +58,10 @@ public class ProfileFragment extends Fragment {
 
         buttonAddEditData = root.findViewById(R.id.addEditData_button);
         buttonUploadRecipe = root.findViewById(R.id.uploadRecipe_button);
-        buttonSearchFam = root.findViewById(R.id.searchFam_button);
-        buttonSeeRequests = root.findViewById(R.id.seeRequest_button);
     }
 
     public void setValues(){
+        Glide.with(this).load(storageHelper.getUserEntity().getProfilePicURL()).into(profilePic);
         username.setText(storageHelper.getUserEntity().getFirstname());
         editablename.setText(storageHelper.getUserEntity().getName());
         editablefirstname.setText(storageHelper.getUserEntity().getFirstname());
@@ -79,20 +83,7 @@ public class ProfileFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        buttonSearchFam.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), SearchActivity.class);
-                startActivity(intent);
-            }
-        });
-        buttonSeeRequests.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(),RequestsActivity.class);
-                startActivity(intent);
-            }
-        });
+
     }
 
 }

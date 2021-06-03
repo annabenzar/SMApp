@@ -94,7 +94,6 @@ public class UploadARecipeActivity extends AppCompatActivity {
         //PENTRU IMAGINE
         if (requestCode == PICK_VIDEO && resultCode == RESULT_OK
                 && data != null && data.getData() != null) {
-
             filePath = data.getData(); //path of the choosen file(image/video)
         }
     }

@@ -106,7 +106,8 @@ public class EditActivity extends AppCompatActivity {
             map.put("password",password);
             final String userId = curentUser.getUid();
             usersDatabase.child(curentUser.getUid()).updateChildren(map);
-            UserEntity userEntity = new UserEntity(userId,name,firstname,email,age,password);
+            String mUri = StorageHelper.getInstance().getUserEntity().getProfilePicURL();
+            UserEntity userEntity = new UserEntity(mUri,userId,name,firstname,email,age,password);
             StorageHelper.getInstance().setUserEntity(userEntity);
             startActivity(new Intent(EditActivity.this, HomeScreen.class));
     }

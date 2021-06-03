@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.myapplication.Models.UserEntity;
 import com.example.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -49,6 +50,7 @@ public  class RequestsAdapter extends RecyclerView.Adapter<RequestsViewHolder> {
         final FirebaseUser mUser= FirebaseAuth.getInstance().getCurrentUser(); //user-ul curent conectat
         final String currentUserID = newUsersRequestsList.getId(); //user-ul curent din lista
 
+        Glide.with(context).load(newUsersRequestsList.getProfilePicURL()).into(holder.profilePicRequest);
 
         holder.userNameRequest.setText(newUsersRequestsList.getName());
         holder.userFirstNameRequest.setText(newUsersRequestsList.getFirstname());

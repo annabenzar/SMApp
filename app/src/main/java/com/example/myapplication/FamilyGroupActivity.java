@@ -57,7 +57,7 @@ public class FamilyGroupActivity extends AppCompatActivity {
                     for (DataSnapshot newpostsnapshot : postsnapshot.getChildren()) {
                         String databaseUser = newpostsnapshot.getKey();
                         if (databaseUser.equals(mUser.getUid())) {
-                            connectedUserFound[0] = 1;//daca m-am gasit pe mine, user-ul conectat
+                            connectedUserFound[0] = 1;//daca s-a gasit user-ul conectat
                             //mai parcurg o data familia respectiva si caut userii in tabela de userii
                             for (DataSnapshot anothersnapshot : postsnapshot.getChildren()) {
                                 //preiau statusul la fiecare si id-ul pentru cautare in userTable
@@ -72,10 +72,11 @@ public class FamilyGroupActivity extends AppCompatActivity {
                                             String userKey = usersSnapshot.getKey();
 
                                             if (userKey.equals(idForUserTable)) {
+                                                String urlRetrieved = String.valueOf(usersSnapshot.child("profilePicURL").getValue());
                                                 String nameRetrieved = String.valueOf(usersSnapshot.child("name").getValue());
                                                 String firstNameRetrieved = String.valueOf(usersSnapshot.child("firstname").getValue());
                                                 String idRetrieved = String.valueOf(usersSnapshot.child("id").getValue());
-                                                ListFamilyGroupUserModel listFamilyGroupUserModel = new ListFamilyGroupUserModel(nameRetrieved, firstNameRetrieved, status, idRetrieved);
+                                                ListFamilyGroupUserModel listFamilyGroupUserModel = new ListFamilyGroupUserModel(urlRetrieved,nameRetrieved, firstNameRetrieved, status, idRetrieved);
                                                 list.add(listFamilyGroupUserModel);
                                             }
                                             adapter = new FamilyGroupAdapter(list);

@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.myapplication.FamilyGroupActivity;
 import com.example.myapplication.Models.ListFamilyGroupUserModel;
 import com.example.myapplication.R;
@@ -50,6 +51,8 @@ public class FamilyGroupAdapter extends RecyclerView.Adapter<FamilyGroupViewHold
 
         final FirebaseUser mUSer = FirebaseAuth.getInstance().getCurrentUser();
         final  String currentUserID = listFamilyGroupUserModel.getIdFamilyGroupUser(); //user-ul curent din lista
+
+        Glide.with(context).load(listFamilyGroupUserModel.getProfilePicURL()).into(holder.profilePicFam);
 
         holder.nameFamilyGroupUser.setText(listFamilyGroupUserModel.getNameFamilyGroupUser());
         holder.firstNameFamilyGroupUser.setText(listFamilyGroupUserModel.getFirstnameFamilyGroupUSer());

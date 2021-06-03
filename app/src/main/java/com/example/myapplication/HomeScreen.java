@@ -13,6 +13,8 @@ import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.myapplication.ui.profile.RequestsActivity;
+import com.example.myapplication.ui.profile.SearchActivity;
 import com.example.myapplication.ui.recipes.RecipesFragment;
 import com.example.myapplication.ui.toCook.ToCookFragment;
 import com.example.myapplication.ui.profile.ProfileFragment;
@@ -56,6 +58,12 @@ public class HomeScreen extends AppCompatActivity implements BottomNavigationVie
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
+            case R.id.seeRequests:
+                startActivity(new Intent(this, RequestsActivity.class));
+                return true;
+            case R.id.searchUsers:
+                startActivity(new Intent(this, SearchActivity.class));
+                return true;
             case R.id.seeFam:
                 startActivity(new Intent(this,FamilyGroupActivity.class));
                 return true;

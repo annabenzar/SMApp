@@ -25,31 +25,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="3dp"
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
         android:textSize="20sp"
         android:layout_below="@+id/text_home"
         android:text="Your name" />
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profilePic_view"
+        android:layout_marginStart="110dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FF000000"
+        android:layout_below="@id/name_home"/>
 
     <TextView
         android:id="@+id/profile_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="20dp"
         android:textStyle="bold"
         android:textSize="20sp"
-        android:layout_below="@+id/name_home"
+        android:layout_below="@+id/profilePic_view"
         android:text="Name: " />
     <TextView
         android:id="@+id/profile_yourname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="20dp"
         android:textSize="20sp"
         android:layout_below="@+id/profile_name" />
@@ -59,7 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:textStyle="bold"
         android:textSize="20sp"
@@ -71,7 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="20dp"
         android:textSize="20sp"
         android:layout_below="@+id/profile_firstname" />
@@ -81,7 +90,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:textStyle="bold"
         android:textSize="20sp"
@@ -93,7 +102,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="20dp"
         android:textSize="20sp"
         android:layout_below="@+id/profile_email" />
@@ -103,7 +112,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:textStyle="bold"
         android:textSize="20sp"
@@ -115,7 +124,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="20dp"
         android:textSize="20sp"
         android:layout_below="@+id/profile_age"/>
@@ -124,7 +133,7 @@
         android:id="@+id/layout_buttons_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="0dp"
         android:orientation="horizontal"
         android:layout_below="@id/profile_yourage"
         android:weightSum="2">
@@ -134,7 +143,7 @@
             android:layout_width="0dp"
             android:layout_marginStart="2dp"
             android:layout_marginEnd="1dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:background="@drawable/rounded_corners"
             android:textColor="#FFFFFF"
             android:text="Add/Edit data"/>
@@ -142,45 +151,12 @@
             android:id="@+id/uploadRecipe_button"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:background="@drawable/rounded_corners"
             android:layout_marginStart="1dp"
             android:layout_marginEnd="2dp"
             android:textColor="#FFFFFF"
             android:text="Upload a recipe"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout_buttons_profile2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="7dp"
-        android:layout_below="@id/layout_buttons_profile"
-        android:weightSum="2">
-
-        <Button
-            android:id="@+id/searchFam_button"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="1dp"
-            android:layout_marginEnd="2dp"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_corners"
-            android:text="Search fam "
-            android:textColor="#FFFFFF" />
-
-        <Button
-            android:id="@+id/seeRequest_button"
-            android:layout_weight="1"
-            android:layout_marginStart="1dp"
-            android:layout_marginEnd="2dp"
-            android:layout_height="50dp"
-            android:layout_width="0dp"
-            android:background="@drawable/rounded_corners"
-            android:textColor="#FFFFFF"
-            android:text="See Requests"/>
 
     </LinearLayout>
 </RelativeLayout>

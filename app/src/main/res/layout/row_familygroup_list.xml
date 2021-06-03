@@ -14,9 +14,18 @@
         android:background="#d3d3d3"
         android:layout_height="50dp">
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profilePic_famGroup"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#FF000000"/>
+
         <TextView
             android:id="@+id/nameUser_familyGroup_view"
-            android:layout_weight="2.4"
+            android:layout_weight="2.1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="5dp"
@@ -26,7 +35,7 @@
 
         <TextView
             android:id="@+id/firstNameUser_familyGroup_view"
-            android:layout_weight="2.4"
+            android:layout_weight="2.1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="5dp"
@@ -38,7 +47,7 @@
 
         <TextView
             android:id="@+id/status_familyGroup_view"
-            android:layout_weight="2.4"
+            android:layout_weight="2.1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="5dp"

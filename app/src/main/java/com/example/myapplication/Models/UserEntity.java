@@ -2,9 +2,10 @@ package com.example.myapplication.Models;
 
 public class UserEntity {
 
-    public String id, name, firstname, email, age, password;
+    public String profilePicURL,id, name, firstname, email, age, password;
 
-    public UserEntity(String id,String name, String firstname, String email, String age, String password) {
+    public UserEntity(String profilePicURL,String id,String name, String firstname, String email, String age, String password) {
+        this.profilePicURL= profilePicURL;
         this.id = id;
         this.name = name;
         this.firstname = firstname;
@@ -14,6 +15,14 @@ public class UserEntity {
     }
     public UserEntity(){
 
+    }
+
+    public String getProfilePicURL() {
+        return profilePicURL;
+    }
+
+    public void setProfilePicURL(String profilePicURL) {
+        this.profilePicURL = profilePicURL;
     }
 
     public String getId() {

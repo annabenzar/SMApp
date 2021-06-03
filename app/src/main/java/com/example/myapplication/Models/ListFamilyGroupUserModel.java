@@ -2,13 +2,22 @@ package com.example.myapplication.Models;
 
 public class ListFamilyGroupUserModel {
 
-    private String nameFamilyGroupUser, firstnameFamilyGroupUSer, statusFamilyGroupUser,idFamilyGroupUser;
+    private String profilePicURL, nameFamilyGroupUser, firstnameFamilyGroupUSer, statusFamilyGroupUser,idFamilyGroupUser;
 
-    public ListFamilyGroupUserModel(String nameFamilyGroupUser, String firstnameFamilyGroupUSer, String statusFamilyGroupUser, String idFamilyGroupUser) {
+    public ListFamilyGroupUserModel(String profilePicURL,String nameFamilyGroupUser, String firstnameFamilyGroupUSer, String statusFamilyGroupUser, String idFamilyGroupUser) {
+        this.profilePicURL = profilePicURL;
         this.nameFamilyGroupUser = nameFamilyGroupUser;
         this.firstnameFamilyGroupUSer = firstnameFamilyGroupUSer;
         this.statusFamilyGroupUser = statusFamilyGroupUser;
         this.idFamilyGroupUser = idFamilyGroupUser;
+    }
+
+    public String getProfilePicURL() {
+        return profilePicURL;
+    }
+
+    public void setProfilePicURL(String profilePicURL) {
+        this.profilePicURL = profilePicURL;
     }
 
     public String getNameFamilyGroupUser() {

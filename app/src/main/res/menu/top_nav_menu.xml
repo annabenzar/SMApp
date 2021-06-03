@@ -2,12 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/logout_item"
-        android:title="LogOut"
+    <item android:id="@+id/searchUsers"
+        android:title="Search users"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/seeRequests"
+        android:title="See invitations"
         app:showAsAction="never"/>
 
     <item android:id="@+id/seeFam"
-        android:title="See your fam group"
+        android:title="See your group"
         app:showAsAction="never"/>
 
+    <item android:id="@+id/logout_item"
+        android:title="LogOut"
+        app:showAsAction="never"/>
 </menu>
