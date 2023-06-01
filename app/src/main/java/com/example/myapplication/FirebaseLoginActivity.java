@@ -129,7 +129,7 @@ public class FirebaseLoginActivity extends AppCompatActivity {
                             });
                         }
                         else {
-                            Toast.makeText(FirebaseLoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(FirebaseLoginActivity.this, "Login failed. Invalid credentials!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }

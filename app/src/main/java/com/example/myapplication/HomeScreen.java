@@ -19,6 +19,7 @@ import com.example.myapplication.ui.recipes.RecipesFragment;
 import com.example.myapplication.ui.toCook.ToCookFragment;
 import com.example.myapplication.ui.profile.ProfileFragment;
 import com.example.myapplication.ui.toBuy.ToBuyFragment;
+import com.example.myapplication.ui.toShop.ToShopFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -28,6 +29,8 @@ public class HomeScreen extends AppCompatActivity implements BottomNavigationVie
     private RecipesFragment recipesFragment;
     private ToBuyFragment toBuyFragment;
     private ToCookFragment toCookFragment;
+
+    private ToShopFragment toShopFragment;
 
     private BottomNavigationView navView;
     //tine evidenta fragmentului curent
@@ -99,6 +102,10 @@ public class HomeScreen extends AppCompatActivity implements BottomNavigationVie
                 fragmentManager.beginTransaction().hide(activeFragment).show(toCookFragment).commit();
                 activeFragment = toCookFragment;
                 return true;
+            case R.id.navigation_shop:
+                fragmentManager.beginTransaction().hide(activeFragment).show(toShopFragment).commit();
+                activeFragment = toShopFragment;
+                return true;
         }
         return false;
     }
@@ -108,7 +115,8 @@ public class HomeScreen extends AppCompatActivity implements BottomNavigationVie
         fragmentManager.beginTransaction().add(R.id.nav_host_fragment, profileFragment, "1").hide(profileFragment).commit();
         fragmentManager.beginTransaction().add(R.id.nav_host_fragment, toCookFragment, "2").hide(toCookFragment).commit();
         fragmentManager.beginTransaction().add(R.id.nav_host_fragment, toBuyFragment, "3").hide(toBuyFragment).commit();
-        fragmentManager.beginTransaction().add(R.id.nav_host_fragment, recipesFragment, "4").detach(recipesFragment).attach(recipesFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.nav_host_fragment, toShopFragment, "4").hide(toShopFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.nav_host_fragment, recipesFragment, "5").detach(recipesFragment).attach(recipesFragment).commit();
         Bundle bundle = new Bundle();
         bundle.putString("key",name);
         profileFragment.setArguments(bundle);
@@ -119,6 +127,7 @@ public class HomeScreen extends AppCompatActivity implements BottomNavigationVie
         recipesFragment = new RecipesFragment();
         toBuyFragment = new ToBuyFragment();
         toCookFragment = new ToCookFragment();
+        toShopFragment = new ToShopFragment();
         //ia val primului fragment
         activeFragment = recipesFragment;
     }

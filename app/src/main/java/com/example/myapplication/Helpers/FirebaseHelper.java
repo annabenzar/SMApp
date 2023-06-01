@@ -9,6 +9,8 @@ import com.google.firebase.storage.StorageReference;
 
 public class FirebaseHelper {
     public static final DatabaseReference usersDatabase = FirebaseDatabase.getInstance().getReference("users");
+    public static final DatabaseReference fruitsDatabase = FirebaseDatabase.getInstance().getReference("fruitsTable");
+    public static final DatabaseReference vegetablesDatabase = FirebaseDatabase.getInstance().getReference("vegetablesTable");
     public static final DatabaseReference recipeDatabase = FirebaseDatabase.getInstance().getReference("recipesData");
     public static final DatabaseReference ingredientsDatabase = FirebaseDatabase.getInstance().getReference("ingredientsTable");
     public static final DatabaseReference favoritesDatabase = FirebaseDatabase.getInstance().getReference("favoritesTable");
