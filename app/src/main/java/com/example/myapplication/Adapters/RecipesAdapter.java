@@ -48,7 +48,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesViewHolder> {
 
         final String urlToOneRecipe = newRecipeList.getRecipeURL();
         final String nameToOneRecipe = newRecipeList.getRecipeName();
-        final String  timeToOneRecipe = newRecipeList.getRecipeTime();
+        final String timeToOneRecipe = newRecipeList.getRecipeTime();
         final String typeOneRecipe = newRecipeList.getRecipeType();
         final String ingredientsToOneRecipe = newRecipeList.getRecipeIngredients();
         final String prepToOneRecipe = newRecipeList.getRecipePrep();

@@ -1,15 +1,13 @@
 package com.example.myapplication.ui.toShop;
 
 import static com.example.myapplication.Helpers.FirebaseHelper.fruitsDatabase;
-import static com.example.myapplication.Helpers.FirebaseHelper.requestsDatabase;
-import static com.example.myapplication.Helpers.FirebaseHelper.usersDatabase;
 import static com.example.myapplication.Helpers.FirebaseHelper.vegetablesDatabase;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -17,17 +15,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.Adapters.RecipesAdapter;
 import com.example.myapplication.Adapters.ShopAdapter;
-import com.example.myapplication.Models.ListRecipeModel;
 import com.example.myapplication.Models.ListShopModel;
-import com.example.myapplication.Models.UserEntity;
 import com.example.myapplication.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;

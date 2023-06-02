@@ -20,10 +20,10 @@ public class ShopViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void initializeViews(){
-        imageView = itemView.findViewById(R.id.image_view_upload);
-        nameView = itemView.findViewById(R.id.name_view_upload);
-        priceView = itemView.findViewById(R.id.price_view_upload);
-        conditionView = itemView.findViewById(R.id.condition_view_upload);
+        imageView = itemView.findViewById(R.id.shop_image_view);
+        nameView = itemView.findViewById(R.id.shop_name_view);
+        priceView = itemView.findViewById(R.id.shop_price_view);
+        conditionView = itemView.findViewById(R.id.shop_condition_view);
     }
 
 }

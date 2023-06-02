@@ -11,17 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.myapplication.Models.ListRecipeModel;
 import com.example.myapplication.Models.ListShopModel;
+import com.example.myapplication.OneProductActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.OneRecipeActivity;
 
 import java.util.List;
 
 public class ShopAdapter extends RecyclerView.Adapter<ShopViewHolder> {
     private Context context;
     private List<ListShopModel> shopList;
-
     @NonNull
     @Override
     public ShopViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -31,11 +29,9 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopViewHolder> {
         ShopViewHolder viewHolder = new ShopViewHolder(contactView);
         return viewHolder;
     }
-
     public ShopAdapter(List<ListShopModel> shopList) {
         this.shopList = shopList;
     }
-
     @Override
     public void onBindViewHolder(@NonNull ShopViewHolder holder, int position) {
 
@@ -47,35 +43,25 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopViewHolder> {
         //load image
         Glide.with(context).load(newShopList.getProductURL()).into(holder.imageView);
 
-//        final String urlToOneRecipe = newRecipeList.getRecipeURL();
-//        final String nameToOneRecipe = newRecipeList.getRecipeName();
-//        final String  timeToOneRecipe = newRecipeList.getRecipeTime();
-//        final String typeOneRecipe = newRecipeList.getRecipeType();
-//        final String ingredientsToOneRecipe = newRecipeList.getRecipeIngredients();
-//        final String prepToOneRecipe = newRecipeList.getRecipePrep();
-//        final String authorOneRecipe = newRecipeList.getRecipeAuthor();
+        final String productURL = newShopList.getProductURL();
+        final String productName = newShopList.getProductName();
+        final String productPrice = newShopList.getProductPrice();
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), OneProductActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("url", productURL);
+                bundle.putString("name", productName);
+                bundle.putString("price", productPrice);
 
+                intent.putExtras(bundle);
+                context.startActivity(intent);
 
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //ce se intampla la click pe un cardview
-//                Intent intent = new Intent(v.getContext() , OneRecipeActivity.class);
-//                Bundle bundle = new Bundle();
-//                bundle.putString("url",urlToOneRecipe);
-//                bundle.putString("name",nameToOneRecipe);
-//                bundle.putString("time",timeToOneRecipe);
-//                bundle.putString("type",typeOneRecipe);
-//                bundle.putString("ingredients",ingredientsToOneRecipe);
-//                bundle.putString("prep",prepToOneRecipe);
-//                bundle.putString("author",authorOneRecipe);
-//                intent.putExtras(bundle);
-//                context.startActivity(intent);
-//            }
-//        });
+            }
+        });
     }
-
     @Override
     public int getItemCount() {
         return shopList.size();
