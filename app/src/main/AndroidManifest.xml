@@ -18,7 +18,9 @@
         android:theme="@style/AppTheme"
         android:requestLegacyExternalStorage="true">
 
-        <activity android:name=".FirstPageActivity" >
+        <activity
+            android:name=".FirstPageActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,5 +37,6 @@
         <activity android:name=".OneRecipeActivity"/>
         <activity android:name=".ui.profile.RequestsActivity"/>
         <activity android:name=".FamilyGroupActivity"/>
+        <activity android:name=".OneProductActivity"/>
     </application>
 </manifest>

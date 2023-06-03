@@ -30,7 +30,7 @@ public class OneProductActivity extends AppCompatActivity {
     private TextView productDetails, nameProduct,descriptionProduct,priceProduct,actualPriceProduct,quantityText;
     private Button addToCartButton;
     String imgUrl, productName, productPrice;
-    private int quantity = 1;
+    private int quantity = 1, extractedPrice;
 
     FirebaseAuth auth;
     private FirebaseFirestore firestore;
@@ -104,13 +104,13 @@ public class OneProductActivity extends AppCompatActivity {
         saveCurrentDate = currentDate.format(calendarForDate.getTime());
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
         saveCurrentTime = currentTime.format(calendarForDate.getTime());
+        String totalPrice = getTotalPrice();
 
         final HashMap<String,Object> cartMap = new HashMap<>();
-        String extractedPrice = extractPrice();
 //        Toast.makeText(this, "Extracted price:"+extractedPrice, Toast.LENGTH_SHORT).show();
         cartMap.put("productName",nameProduct.getText().toString());
         cartMap.put("productURL",imgUrl);
-        cartMap.put("productPrice",extractedPrice);
+        cartMap.put("productTotalPrice",totalPrice);
         cartMap.put("currentTime",saveCurrentTime);
         cartMap.put("currentDate",saveCurrentDate);
 
@@ -124,13 +124,24 @@ public class OneProductActivity extends AppCompatActivity {
                 });
 
     }
-    private String extractPrice(){
+    private int extractPrice(){
         String[] priceParts = productPrice.split("\\$");
         if (priceParts.length > 0) {
             String priceValue = priceParts[0];
-            return priceValue;
+            int priceValueInteger = Integer.parseInt(priceValue);
+            return priceValueInteger;
         }
-        return null;
+        return 0;
+    }
+
+    private String getTotalPrice(){
+        // extracted price * quantityText
+        extractedPrice = extractPrice();
+        String quantityString = quantityText.getText().toString();
+        int quantityInteger = Integer.parseInt(quantityString);
+        int totalPrice  = extractedPrice * quantityInteger;
+        String totalPriceString = Integer.toString(totalPrice);
+        return totalPriceString;
     }
 
 }
