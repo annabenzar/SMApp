@@ -1,6 +1,7 @@
 package com.example.myapplication.Adapters;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +12,7 @@ import com.example.myapplication.R;
 public class CartViewHolder extends RecyclerView.ViewHolder {
     public ImageView imageView;
     public TextView nameView, dateView, actualDateView, timeView, actualTimeView, totalQuantity, actualTotalQuantity, totalPrice, actualTotalPrice;
+    public Button deletePrduct;
 
     public CartViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -28,6 +30,7 @@ public class CartViewHolder extends RecyclerView.ViewHolder {
         actualTotalQuantity = itemView.findViewById(R.id.actual_quantity_view);
         totalPrice = itemView.findViewById(R.id.cart_price_view);
         actualTotalPrice = itemView.findViewById(R.id.actual_price_view);
+        deletePrduct = itemView.findViewById(R.id.delete_button);
     }
 
 }

@@ -38,11 +38,15 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
         subTotal.setText(String.valueOf(subTotalBillString));
 
         shippingString = shipping.getText().toString();
-        String[] parts = shippingString.split("\\$"); // Split the string at the dollar sign
+        String[] parts = shippingString.split("\\$");
         String numericValue = parts[0];
 
         shippingInt = Integer.parseInt(numericValue);
-
+        boolean isFreeShiping = checkFreeShiping(subTotalBill);
+        if(isFreeShiping){
+            shippingInt = 0;
+            shipping.setText("0$");
+        }
         totalInt = subTotalBill + shippingInt;
 
         totalBillString= String.valueOf(totalInt);
@@ -50,7 +54,14 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
         total.setText(totalBillString);
 
         setupListeners();
+    }
+    public boolean checkFreeShiping(int subTotalBill){
 
+        if(subTotalBill > 20){
+            return true;
+        }else{
+            return false;
+        }
     }
     public void setupListeners() {
         checkOutButton.setOnClickListener(new View.OnClickListener() {

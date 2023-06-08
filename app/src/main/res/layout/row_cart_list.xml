@@ -10,15 +10,34 @@
         android:weightSum="10"
         android:layout_margin="10dp"
         android:orientation="horizontal">
-        <ImageView
-            android:id="@+id/cart_image_view"
-            android:layout_width="300dp"
-            android:scaleType="center"
-            android:layout_marginLeft="15dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            android:layout_height="120dp"
-            android:layout_weight="4" />
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="6"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/cart_image_view"
+                android:layout_width="match_parent"
+                android:scaleType="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_height="120dp"
+                android:layout_weight="4" />
+            <Button
+                android:id="@+id/delete_button"
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:background="@drawable/rounded_corners"
+                android:textColor="#FFFFFF"
+                android:layout_alignParentBottom="true"
+                android:text="Delete"
+                />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,7 +46,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
             android:gravity="center"
-            android:layout_weight="6"
+            android:layout_weight="4"
             android:orientation="vertical">
             <TextView
                 android:id="@+id/cart_name_view"
@@ -39,7 +58,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp">
                 <TextView
                     android:id="@+id/cart_date_view"
                     android:layout_width="wrap_content"
@@ -58,7 +78,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp">
                 <TextView
                     android:id="@+id/cart_time_view"
                     android:layout_width="wrap_content"
@@ -77,7 +98,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp">
                 <TextView
                     android:id="@+id/cart_quantity_view"
                     android:layout_width="wrap_content"
@@ -96,7 +118,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp">
                 <TextView
                     android:id="@+id/cart_price_view"
                     android:layout_width="wrap_content"

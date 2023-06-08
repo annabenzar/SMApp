@@ -64,7 +64,15 @@ public class CartActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()){
                             for(DocumentSnapshot doc: task.getResult().getDocuments()){
-                                ListCartModel newList = doc.toObject(ListCartModel.class);
+                                String productURL, productName, currentDate, currentTime, productTotalQuantity, productTotalPrice,firebaseUid;
+                                productURL = doc.getString("productURL");
+                                productName = doc.getString("productName");
+                                currentDate = doc.getString("currentDate");
+                                currentTime = doc.getString("currentTime");
+                                productTotalQuantity = doc.getString("productTotalQuantity");
+                                productTotalPrice = doc.getString("productTotalPrice");
+                                firebaseUid = doc.getId();
+                                ListCartModel newList = new ListCartModel(productURL,productName,currentDate,currentTime,productTotalQuantity,productTotalPrice,firebaseUid);
                                 list.add(newList);
                                 adapter.notifyDataSetChanged();
                             }
@@ -77,7 +85,6 @@ public class CartActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
              totalBill = intent.getIntExtra("totalAmount",0);
              totalAmount.setText(totalBill+" $");
-
         }
     };
     public void setupListeners() {
