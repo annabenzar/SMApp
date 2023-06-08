@@ -39,13 +39,10 @@ public class FirebaseRegisterActivity extends AppCompatActivity {
     private TextView registerText;
     private TextInputEditText nameEt,firstnameEt,emailEt,ageEt,passwordEt;
     private Button choosePicButton, registerButton;
-    //pt autentificare
     FirebaseAuth firebaseAuth;
 
     private Uri filePath;
     private final int PICK_PROFILEPIC = 1111;
-
-    // Folder path for Firebase Storage.
     String Storage_Path = "ProfilePictures/";
 
 
@@ -85,10 +82,10 @@ public class FirebaseRegisterActivity extends AppCompatActivity {
     }
 
     private void chooseProfilePic() {
-        Intent intent = new Intent(); //creates an image chooser dialog(allows user to browse through the device gallery)
+        Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_PROFILEPIC); //receive the result (selected video)
+        startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_PROFILEPIC);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -96,17 +93,13 @@ public class FirebaseRegisterActivity extends AppCompatActivity {
         //PENTRU IMAGINE
         if (requestCode == PICK_PROFILEPIC && resultCode == RESULT_OK
                 && data != null && data.getData() != null) {
-            filePath = data.getData(); //path of the choosen file(image/video)
+            filePath = data.getData();
         }
     }
 
     public String GetFileExtension(Uri uri) {
-
         ContentResolver contentResolver = getContentResolver();
-
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-
-        // Returning the file Extension.
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
@@ -119,61 +112,68 @@ public class FirebaseRegisterActivity extends AppCompatActivity {
         final String age = ageEt.getText().toString();
         final String password = passwordEt.getText().toString();
         //validare input-uri
-        if (emailEt.getText().toString().isEmpty() || passwordEt.getText().toString().isEmpty())
-        {
+        if (emailEt.getText().toString().isEmpty() || passwordEt.getText().toString().isEmpty()) {
             Toast.makeText(this, "Please fill in email and password", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(password.length() < 6){
-            Toast.makeText(this, "The password must be at least 6 character long!", Toast.LENGTH_SHORT).show();
-            return;
+        if (isPasswordValid(password)) {
+            registerUser(email, password, name, firstname, age);
+        } else {
+            Toast.makeText(this, "Password must be at least 8 characters long and contain at least 1 uppercase letter and 1 digit.", Toast.LENGTH_SHORT).show();
         }
-        //inregistrare User
 
-        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    final FirebaseUser user = firebaseAuth.getCurrentUser();
-                    if (user == null){
-                        return;
-                    }
-                    final String idUser = user.getUid();
-                    if (filePath != null) {
-                        //second storage ref
-                        final StorageReference storageReferenceProfilePic = profilePicStorage.child(Storage_Path + System.currentTimeMillis() + "." + GetFileExtension(filePath));
+    }
+    public boolean isPasswordValid(String password) {
+        // Password rules: At least 8 characters, at least 1 uppercase letter, and at least 1 digit
+        String regex = "^(?=.*[A-Z])(?=.*\\d).{8,}$";
+        return password.matches(regex);
+    }
 
-                        UploadTask uploadTask = storageReferenceProfilePic.putFile(filePath);
+    public void registerUser(String email, String password, String name, String firstname, String age){
+            firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()){
+                        final FirebaseUser user = firebaseAuth.getCurrentUser();
+                        if (user == null){
+                            return;
+                        }
+                        final String idUser = user.getUid();
+                        if (filePath != null) {
+                            //second storage ref
+                            final StorageReference storageReferenceProfilePic = profilePicStorage.child(Storage_Path + System.currentTimeMillis() + "." + GetFileExtension(filePath));
 
-                        uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                            @Override
-                            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                                if (!task.isSuccessful()) {
-                                    throw task.getException();
+                            UploadTask uploadTask = storageReferenceProfilePic.putFile(filePath);
+
+                            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                                @Override
+                                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                                    if (!task.isSuccessful()) {
+                                        throw task.getException();
+                                    }
+                                    return storageReferenceProfilePic.getDownloadUrl();
                                 }
-                                return storageReferenceProfilePic.getDownloadUrl();
-                            }
-                        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Uri> task) {
-                                if (task.isSuccessful()) {
-                                    Uri downloadUri = task.getResult();
-                                    String mUri = downloadUri.toString();
-                                    UserEntity userEntity = new UserEntity(mUri,idUser,name,firstname,email,age,password);
-                                    usersDatabase.child(user.getUid()).setValue(userEntity);
-                                    startActivity(new Intent(FirebaseRegisterActivity.this, FirebaseLoginActivity.class));
-                                } else {
-                                    Toast.makeText(FirebaseRegisterActivity.this, "Failed to download the url", Toast.LENGTH_SHORT).show();
+                            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Uri> task) {
+                                    if (task.isSuccessful()) {
+                                        Uri downloadUri = task.getResult();
+                                        String mUri = downloadUri.toString();
+                                        UserEntity userEntity = new UserEntity(mUri,idUser,name,firstname,email,age,password);
+                                        usersDatabase.child(user.getUid()).setValue(userEntity);
+                                        startActivity(new Intent(FirebaseRegisterActivity.this, FirebaseLoginActivity.class));
+                                    } else {
+                                        Toast.makeText(FirebaseRegisterActivity.this, "Failed to download the url", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                            }
-                        });
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                }
+                            });
+                        }
                     }
                 }
-            }
-        });
+            });
     }
 }
