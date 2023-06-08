@@ -36,6 +36,10 @@
         <activity android:name=".FirebaseLoginActivity"/>
         <activity android:name=".OneRecipeActivity"/>
         <activity android:name=".ui.profile.RequestsActivity"/>
+        <activity android:name=".ui.profile.CartActivity"/>
+        <activity android:name=".ui.profile.AddressActivity"/>
+        <activity android:name=".ui.profile.AddAdressActivity"/>
+        <activity android:name=".ui.profile.PaymentActivity"/>
         <activity android:name=".FamilyGroupActivity"/>
         <activity android:name=".OneProductActivity"/>
     </application>

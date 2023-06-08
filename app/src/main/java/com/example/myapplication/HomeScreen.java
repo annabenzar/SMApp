@@ -13,6 +13,7 @@ import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.myapplication.ui.profile.CartActivity;
 import com.example.myapplication.ui.profile.RequestsActivity;
 import com.example.myapplication.ui.profile.SearchActivity;
 import com.example.myapplication.ui.recipes.RecipesFragment;
@@ -69,6 +70,9 @@ public class HomeScreen extends AppCompatActivity implements BottomNavigationVie
                 return true;
             case R.id.seeFam:
                 startActivity(new Intent(this,FamilyGroupActivity.class));
+                return true;
+            case R.id.seeCart:
+                startActivity(new Intent(this, CartActivity.class));
                 return true;
             case R.id.logout_item:
                 FirebaseAuth.getInstance().signOut();

@@ -14,6 +14,10 @@
         android:title="See your group"
         app:showAsAction="never"/>
 
+    <item android:id="@+id/seeCart"
+        android:title="See your cart"
+        app:showAsAction="never"/>
+
     <item android:id="@+id/logout_item"
         android:title="LogOut"
         app:showAsAction="never"/>

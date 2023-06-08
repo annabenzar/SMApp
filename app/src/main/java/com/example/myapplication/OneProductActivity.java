@@ -107,12 +107,12 @@ public class OneProductActivity extends AppCompatActivity {
         String totalPrice = getTotalPrice();
 
         final HashMap<String,Object> cartMap = new HashMap<>();
-//        Toast.makeText(this, "Extracted price:"+extractedPrice, Toast.LENGTH_SHORT).show();
-        cartMap.put("productName",nameProduct.getText().toString());
-        cartMap.put("productURL",imgUrl);
-        cartMap.put("productTotalPrice",totalPrice);
-        cartMap.put("currentTime",saveCurrentTime);
         cartMap.put("currentDate",saveCurrentDate);
+        cartMap.put("currentTime",saveCurrentTime);
+        cartMap.put("productName",nameProduct.getText().toString());
+        cartMap.put("productTotalPrice",totalPrice);
+        cartMap.put("productTotalQuantity",quantityText.getText().toString());
+        cartMap.put("productURL",imgUrl);
 
         firestore.collection("AddToCart").document(auth.getCurrentUser().getUid())
                 .collection("User").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
@@ -122,9 +122,8 @@ public class OneProductActivity extends AppCompatActivity {
                         finish();
                     }
                 });
-
     }
-    private int extractPrice(){
+    private int extractPrice() {
         String[] priceParts = productPrice.split("\\$");
         if (priceParts.length > 0) {
             String priceValue = priceParts[0];
@@ -133,7 +132,6 @@ public class OneProductActivity extends AppCompatActivity {
         }
         return 0;
     }
-
     private String getTotalPrice(){
         // extracted price * quantityText
         extractedPrice = extractPrice();
