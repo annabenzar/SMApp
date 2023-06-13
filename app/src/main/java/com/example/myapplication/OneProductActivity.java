@@ -13,11 +13,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.myapplication.Models.ListCartModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -97,7 +100,8 @@ public class OneProductActivity extends AppCompatActivity {
             }
         });
     }
-    private void addToCart(){
+    private void addToCart() {
+        final int[] cnt = {0};
         String saveCurrentTime, saveCurrentDate;
         Calendar calendarForDate = Calendar.getInstance();
         SimpleDateFormat currentDate = new SimpleDateFormat("dd MM yyyy");
@@ -106,19 +110,71 @@ public class OneProductActivity extends AppCompatActivity {
         saveCurrentTime = currentTime.format(calendarForDate.getTime());
         String totalPrice = getTotalPrice();
 
-        final HashMap<String,Object> cartMap = new HashMap<>();
-        cartMap.put("currentDate",saveCurrentDate);
-        cartMap.put("currentTime",saveCurrentTime);
-        cartMap.put("productName",nameProduct.getText().toString());
-        cartMap.put("productTotalPrice",totalPrice);
-        cartMap.put("productTotalQuantity",quantityText.getText().toString());
-        cartMap.put("productURL",imgUrl);
+        final HashMap<String, Object> cartMap = new HashMap<>();
+        cartMap.put("currentDate", saveCurrentDate);
+        cartMap.put("currentTime", saveCurrentTime);
+        cartMap.put("productName", nameProduct.getText().toString());
+        cartMap.put("productTotalPrice", totalPrice);
+        cartMap.put("productTotalQuantity", quantityText.getText().toString());
+        cartMap.put("productURL", imgUrl);
 
+        firestore.collection("AddToCart").document(auth.getCurrentUser().getUid())
+                .collection("User").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                                String productName = doc.getString("productName");
+                                String givenProductName = nameProduct.getText().toString();
+                                if (productName.equals(givenProductName)) {
+                                    String documentUid = doc.getId();
+                                    String productTotalPrice = doc.getString("productTotalPrice");
+                                    String productTotalQuantity = doc.getString("productTotalQuantity");
+                                    cnt[0] += 1;
+                                    editExistingProduct(cartMap, documentUid, productTotalPrice, productTotalQuantity);
+                                    break;
+                                }
+                            }
+                            if (cnt[0] == 0) {
+                                addNewProductToCart(cartMap);
+                            }
+                        }
+                    }
+                });
+    }
+    public void editExistingProduct(HashMap<String, Object> cartMap,String documentID, String productTotalPrice, String productTotalQuantity){
+        int priceFromDocInt, quantityFromDocInt;
+        priceFromDocInt = Integer.parseInt(productTotalPrice);
+        quantityFromDocInt = Integer.parseInt(productTotalQuantity);
+        String totalPriceFromProduct = getTotalPrice();
+        String quantityFromProduct = quantityText.getText().toString();
+        int priceFromProductInt, quantityfromProductInt;
+        priceFromProductInt = Integer.parseInt(totalPriceFromProduct);
+        quantityfromProductInt = Integer.parseInt(quantityFromProduct);
+        int totalPrice, totalQuantity;
+        totalPrice = priceFromDocInt + priceFromProductInt;
+        totalQuantity = quantityFromDocInt + quantityfromProductInt;
+        String totalPriceString, totalQuantityString;
+        totalPriceString = Integer.toString(totalPrice);
+        totalQuantityString = Integer.toString(totalQuantity);
+        cartMap.put("productTotalPrice",totalPriceString);
+        cartMap.put("productTotalQuantity",totalQuantityString);
+
+        firestore.collection("AddToCart").document(auth.getCurrentUser().getUid())
+                .collection("User").document(documentID).set(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(getApplicationContext(), "Added existing product to your cart", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                });
+    }
+    public void addNewProductToCart(HashMap<String, Object> cartMap) {
         firestore.collection("AddToCart").document(auth.getCurrentUser().getUid())
                 .collection("User").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
-                        Toast.makeText(getApplicationContext(), "Added product to your cart", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Added new product to your cart", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 });
@@ -133,7 +189,6 @@ public class OneProductActivity extends AppCompatActivity {
         return 0;
     }
     private String getTotalPrice(){
-        // extracted price * quantityText
         extractedPrice = extractPrice();
         String quantityString = quantityText.getText().toString();
         int quantityInteger = Integer.parseInt(quantityString);
