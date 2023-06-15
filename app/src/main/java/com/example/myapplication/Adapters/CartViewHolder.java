@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.R;
 
 public class CartViewHolder extends RecyclerView.ViewHolder {
-    public ImageView imageView;
-    public TextView nameView, dateView, actualDateView, timeView, actualTimeView, totalQuantity, actualTotalQuantity, totalPrice, actualTotalPrice;
+    public ImageView imageView, minusButtonCart, plusbuttonCart;
+    public TextView nameView, dateView, actualDateView, timeView, actualTimeView, totalQuantity, actualTotalQuantity, totalPrice, actualTotalPrice, quantityTextCart;
     public Button deletePrduct;
 
     public CartViewHolder(@NonNull View itemView) {
@@ -31,6 +31,8 @@ public class CartViewHolder extends RecyclerView.ViewHolder {
         totalPrice = itemView.findViewById(R.id.cart_price_view);
         actualTotalPrice = itemView.findViewById(R.id.actual_price_view);
         deletePrduct = itemView.findViewById(R.id.delete_button);
+        minusButtonCart = itemView.findViewById(R.id.cart_minus_button);
+        quantityTextCart = itemView.findViewById(R.id.cart_quantity_text);
+        plusbuttonCart = itemView.findViewById(R.id.cart_plus_button);
     }
-
 }

@@ -23,5 +23,11 @@ public class ListCartModel {
     public String getProductTotalQuantity() { return productTotalQuantity;}
     public String getProductTotalPrice() { return productTotalPrice;}
     public String getFirebaseUid() { return firebaseUid;}
+    public void setProductTotalQuantity(String productTotalQuantity){
+        this.productTotalQuantity = productTotalQuantity;
+    }
+    public void setProductTotalPrice(String productTotalPrice){
+        this.productTotalPrice = productTotalPrice;
+    }
 
 }
