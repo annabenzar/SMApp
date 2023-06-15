@@ -6,4 +6,5 @@
     <color name="buttoncollor">#D16442</color>
     <color name="appColor">#D16442</color>
     <color name="adminColor">#228b22</color>
+    <color name="white">#ffffff</color>
 </resources>
